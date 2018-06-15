@@ -1,0 +1,86 @@
+% -*- Mode:TeX -*-
+
+%% IMPORTANT: The official thesis specifications are available at:
+%%            http://libraries.mit.edu/archives/thesis-specs/
+%%
+%%            Please verify your thesis' formatting and copyright
+%%            assignment before submission.  If you notice any
+%%            discrepancies between these templates and the 
+%%            MIT Libraries' specs, please let us know
+%%            by e-mailing thesis@mit.edu
+
+%% The documentclass options along with the pagestyle can be used to generate
+%% a technical report, a draft copy, or a regular thesis.  You may need to
+%% re-specify the pagestyle after you \include  cover.tex.  For more
+%% information, see the first few lines of mitthesis.cls. 
+%\documentclass[12pt,vi,twoside]{mitthesis}
+%%
+%%  If you want your thesis copyright to you instead of MIT, use the
+%%  ``vi'' option, as above.
+%%
+%\documentclass[12pt,twoside,leftblank]{mitthesis}
+%%
+%% If you want blank pages before new chapters to be labelled ``This
+%% Page Intentionally Left Blank'', use the ``leftblank'' option, as
+%% above. 
+
+\documentclass[11pt,oneside]{Thesis}
+%\usepackage[a4paper, left =3cm, right =3cm, top =2.5cm, bottom =2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{afterpage}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{contour}
+\pagenumbering{gobble}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\makeatletter
+\renewcommand*{\ALG@name}{Algoritmo}
+\makeatother
+\newcommand{\algorithmautorefname}{Algoritmo}
+\algnewcommand\algorithmicforeach{\textbf{for each}}
+\algdef{S}[FOR]{ForEach}[1]{\algorithmicforeach\ #1\ \algorithmicdo}
+\algnewcommand\OR{\textbf{or\space}}
+\algnewcommand\IN{\textbf{in\space}}
+\algnewcommand\TO{\textbf{to\space}}
+\algnewcommand\VARIABLES{\textbf{variables:\space}}
+\renewcommand{\algorithmiccomment}[1]{\hfill$\triangleright$\textcolor{blue}{#1}}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{commath}
+
+\begin{document}
+    \include{Covers/cover_1}
+    \newpage\null\thispagestyle{empty}\newpage
+    \include{Covers/cover_2}
+    \newpage\null\thispagestyle{empty}\newpage
+    \include{Covers/cover_3}
+    \pagenumbering{roman}
+    \newpage\null\thispagestyle{plain}\newpage
+    \include{Summary/summary_esp}
+    \include{Summary/summary_en}
+    \include{Summary/glossary}
+    \newpage\null\thispagestyle{plain}\newpage
+    \include{Index/index}
+    \newpage\null\thispagestyle{plain}\newpage
+    \setcounter{page}{0}
+    \pagenumbering{arabic}
+    \include{Chapters/chapter_1}
+    \include{Chapters/chapter_2}
+    \include{Chapters/chapter_3}
+    \include{Chapters/chapter_4}
+    \include{Chapters/chapter_5}
+    \include{Chapters/chapter_6}
+    \appendix
+    \include{Appendices/appendix_A}
+    \include{Appendices/appendix_B}
+    \include{Appendices/appendix_C}
+    \include{Appendices/appendix_D}
+    \include{Bibliography/biblio}
+\end{document}

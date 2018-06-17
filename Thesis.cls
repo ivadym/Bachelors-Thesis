@@ -546,5 +546,11 @@ requirements for the \@degreeword\ of \\
 \def\keywords{\subsection*{Keywords}\small\def\baselinestretch{1}\@normalsize}
 \def\endkeywords{\par}
 
-\def\glossary{\subsection*{Glosario}\small\def\baselinestretch{1}\@normalsize}
-\def\endglossary{\par}
+%\def\glossary{\subsection*{Glosario}\small\def\baselinestretch{1}\@normalsize}
+%\def\endglossary{\par}
+
+\def\abbreviations{\subsection*{Abreviaturas}\small\def\baselinestretch{1}\@normalsize}
+\def\endgabbreviations{\par}
+
+\def\mathexprs{\subsection*{Expresiones Matem\'aticas}\small\def\baselinestretch{1}\@normalsize}
+\def\endmathexprs{\par}

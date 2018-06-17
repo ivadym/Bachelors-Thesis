@@ -1,1 +1,64 @@
-\chapter{Figuras}
+\chapter{Algoritmos} \label{Appendix:Algorithms}
+
+\section{Algoritmo de la retropropagación}
+
+\begin{algorithm}
+\caption{Algoritmo de la retropropagación}
+\label{alg:Backpropagation}
+\begin{algorithmic}[1]
+    \Function{Backpropagation}{datos, red}
+        \State \VARIABLES pesos ($\omega_{i,j}$), tasa de aprendizaje ($\lambda$)
+        \ForEach{$\omega_{i,j}$ \IN red} \Comment{Inicialización de parámetros}
+            \State $\omega_{i,j} \gets$ pequeño valor aleatorio
+        \EndFor
+        \Repeat
+            \ForEach{$x$ \IN datos} \Comment{Propagación de entradas\slash Obtención de salidas}
+                \ForEach{neurona $j$ \IN capa i = 0} 
+                    \State $\alpha_{0,j} \gets x$ \Comment{Asignación de las entradas}
+                \EndFor
+                \For{capa i = 1 \TO capa i = k}
+                    \ForEach{neurona $j$ \IN capa i} 
+                        \State $s_{i,j} \gets \sum\limits_{j} \omega_{i,j}\cdot \alpha_{i-1,j}$
+                        \State $\alpha_{i,j} \gets f(s_{i,j})$ \Comment{Aplicación de la función de activación}
+                    \EndFor
+                \EndFor
+                \ForEach{neurona $j$ \IN capa i = k} \Comment{Propagación hacia atrás}
+                    \State $\Delta_{k,j} \gets f'(s_{k,j})\cdot (y_{k,j} - \alpha_{k,j})$ \textcolor{blue}{\footnotemark[1]}
+                \EndFor
+                \For{capa i = k-1 \TO capa i = 0}
+                    \ForEach{neurona $j$ \IN capa i}
+                        \State $\Delta_{i,j} \gets f'(s_{i,j})\cdot \sum\limits_{j} \omega_{i,j}\cdot \Delta_{i+1,j}$ \textcolor{blue}{\footnotemark[1]}
+                    \EndFor
+                \EndFor
+                \ForEach{$\omega_{i,j}$ \IN red} \Comment{Actualización de los pesos}
+                    \State $\omega_{i,j} \gets \omega_{i,j} - \lambda \cdot \alpha_{i,j} \cdot \Delta_{i,j}$ \Comment{Descenso Estocástico del Gradiente}
+                \EndFor
+            \EndFor
+        \Until todos los datos se clasifican correctamente \OR satisfacción de otro criterio
+        \State \Return red
+    \EndFunction
+\end{algorithmic}
+\textcolor{blue}{\footnotesize{\\ $^1$ Conversión de la derivada de error con respecto a la salida en la derivada de error con respecto a la entrada multiplicándola por el gradiente de $f(s_{i,j})$.}}
+\end{algorithm}
+
+\section{Algoritmo de la técnica de normalización por lotes}
+
+\begin{algorithm}
+\caption{Algoritmo de la técnica de normalización por lotes \cite{BatchNormalization}}
+\label{alg:BatchNormalization}
+\begin{algorithmic}[1]
+    \Function{BatchNormalization}{datos, red}
+        \State \VARIABLES $\gamma, \beta$ \textcolor{blue}{\footnotemark[1]} \Comment{Parámetros por aprender}
+        \Repeat
+            \ForEach{lote $\mathfrak{B} = \lbrace x_{1 ... m}\rbrace$ \IN datos}
+                \State $\mu_\mathfrak{B} \gets \frac{1}{m}\cdot \sum\limits_{i=1}^{m} x_i$ \Comment{Promedio del lote}
+                \State $\sigma_\mathfrak{B}^{2} \gets \frac{1}{m}\cdot \sum\limits_{i=1}^{m} (x_i - \mu_\mathfrak{B})^2 $ \Comment{Varianza del lote}
+                \State $\hat{x}_i \gets \frac{x_i - \mu_\mathfrak{B}}{\sqrt{\sigma_\mathfrak{B}^{2} + \epsilon}}$\Comment{Normalización}
+                \State $y_i = \gamma \cdot \hat{x}_i + \beta$\Comment{Escalado y desplazamiento}
+            \EndFor
+        \Until todos los lotes de datos normalizados
+        \State \Return $y$
+    \EndFunction
+\end{algorithmic}
+\textcolor{blue}{\footnotesize{\\ $^1$ La tarea de los parámetros $ \gamma $ y $\beta$ es la de mantener la media y la varianza a unos valores preestablecidos.}}
+\end{algorithm}

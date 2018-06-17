@@ -1,7 +1,7 @@
-\chapter{Introducción}
+\chapter{Introducción} \label{Chapter:1}
 
 \section{Motivación}
-Las emociones son especialmente importantes en la inteligencia humana, en la toma de decisiones racionales, en la interacción social, en la percepción, en la memoria, en el aprendizaje y en la creatividad. Además, son indispensables para un desarrollo y una gestión inteligente de las situaciones diarias. Por todo ello, la habilidad de reconocerlas de forma precisa y automatizada es una fuente extremadamente valiosa de información, tanto en el ámbito tecnológico, como social y económico. De hecho, esta capacidad de obtener un estado anímico a partir de la observación de una expresión emocional y a través de un razonamiento sobre la situación afectiva que se está dando, es uno de los sellos de identidad de la inteligencia artificial.
+Las emociones son especialmente importantes en la inteligencia humana, en la toma de decisiones racionales, en la interacción social, en la percepción, en la memoria, en el aprendizaje y en la creatividad. Además, son indispensables para un desarrollo y una gestión inteligente de las situaciones diarias. Por todo ello, la habilidad de reconocerlas de forma precisa y automatizada es una fuente extremadamente valiosa de información, tanto en el ámbito tecnológico, como social y económico. De hecho, esta capacidad de obtener un estado anímico a partir de la observación de una expresión emocional y a través de un razonamiento sobre la situación afectiva que se está dando, es uno de los grandes retos a los que se enfrenta la inteligencia artificial actualmente ya que, a pesar de que las técnicas de reconocimiento han alcanzado una madurez casi suficiente, la comprensión semántica sigue siendo un inmenso reto \cite{Bartneck}.
 
 Esta detección de las emociones es fundamentalmente necesaria para la obtención de un mejor servicio por parte de las máquinas \cite{Picard}, que dotadas de cierta inteligencia afectiva en este proceso de reconocimiento, se beneficiarán de una toma de decisiones más flexible y racional, de la habilidad de determinar prominencias en el comportamiento humano, dando lugar a una atención y a una percepción más naturales, de la capacidad de abordar múltiples asuntos de una manera inteligente y eficiente, y de otras muchas más interacciones con los procesos cognitivos. Todo ello es realmente útil, por ejemplo, en las áreas en las que son utilizados dispositivos inteligentes para el cuidado de los grupos de la tercera edad, para los tratamientos de inserción social de individuos con autismo, para la rehabilitación de personas con parálisis facial o para atender a los distintos pacientes de un hospital, tareas que exigen una comprensión y un análisis profundo del entorno.
 
@@ -19,16 +19,21 @@ Por otro lado, y exclusivamente como aplicación directa del modelo desarrollado
 
 Finalmente, dado que éste es un proyecto multidisciplinar que involucra distintos ámbitos como la computación afectiva, el aprendizaje automático y profundo y la visión por computador, otro de los objetivos es el de aprender la forma en la que se relacionan estos campos y cómo su confluencia puede proporcionar soluciones a problemas complejos.
 
+En resumen, la finalidad de este trabajo se compone de dos objetivos claramente diferenciados:
+\begin{itemize}
+  \item \textbf{Objetivo Principal.} Desarrollo de un sistema de reconocimiento de expresiones faciales altamente competitivo y eficiente en lo que respecta al uso de recursos para su implementación.
+  \item \textbf{Objetivo Secundario.} Integración de este modelo en un sistema empotrado capaz de ofrecer servicios enfocados a la monitorización de las emociones, al seguimiento de los tratamientos psicológicos, o a la realización de ejercicios interactivos para la rehabilitación de pacientes con parálisis facial.
+
+\end{itemize}
+
 \section{Contribuciones}
 
-Mediante el presente escrito se pretende ofrecer un nuevo enfoque dentro del ámbito del reconocimiento de las expresiones faciales, logrando unas tasas de precisión sin precedentes con unos recursos limitados y combinando métodos estándar, como son la utilización de las redes neuronales, la transferencia de aprendizaje, el aprendizaje profundo y la visión por computador.
+Mediante el presente escrito se pretende ofrecer un nuevo enfoque dentro del ámbito del reconocimiento de las expresiones faciales, logrando unas tasas de precisión significativas con unos recursos limitados y combinando métodos estándar, como son la utilización de las redes neuronales, la transferencia de aprendizaje, el aprendizaje profundo y la visión por computador.
  
 En este sentido, las principales contribuciones de este trabajo pueden englobarse en los siguientes puntos:
 \begin{itemize}
   \item Estudio, desarrollo y adaptación a la tarea de identificación de emociones de una serie de modelos preentrenados, y que a día de hoy representan el estado del arte del reconocimiento facial y de imágenes.
   \item Implementación y entrenamiento de estos modelos en la plataforma Google Cloud.
   \item Desarrollo e implementación de un tipo de red generativa antagónica, cuya capacidad de generación de imágenes de forma artificial se pretende aprovechar para extender la base de datos inicial y mejorar, de esta forma, los resultados obtenidos anteriormente.
-  \item Desarrollo y despliegue de un sistema de reconocimiento de expresiones faciales en tiempo real como parte de un espejo inteligente en la \textit{Smart House Living Lab} de la E.T.S.I. de Telecomunicación.
+  \item Desarrollo y despliegue de un sistema de reconocimiento de expresiones faciales en tiempo real como parte de un espejo inteligente de la \textit{Smart House Living Lab} de la E.T.S.I. de Telecomunicación.
 \end{itemize}
-
-Por último, hace falta añadir que el código fuente de este trabajo está disponible, junto con los resultados y las instrucciones para replicarlos, en el siguiente repositorio: \url{https://github.com/ivadym/facial-expression-recognition}.

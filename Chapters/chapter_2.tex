@@ -1,10 +1,12 @@
 \chapter{Antecedentes} \label{Chapter:2}
 
-\section{Inteligencia Afectiva Artificial}
+\section{Inteligencia Emocional Artificial}
 
-Hasta la fecha, los investigadores que están intentando desarrollar ordenadores inteligentes se han centrado principalmente en la resolución de problemas, en el razonamiento, en el aprendizaje, en la percepción, en el lenguaje y en otras tantas tareas cognitivas de interés para este campo. Sin embargo, la mayoría de ellos no han tenido en cuenta la importante influencia de las emociones en estas funciones, y más cuando hay ciertas evidencias de que éstas juegan un papel fundamental en las atribuciones consideradas esenciales para la inteligencia en los humanos \cite{EmotionalIntelligence}. Por ello, este nuevo enfoque indica una clara necesidad de reconsideración del rol de las emociones en los ordenadores.
+El término de inteligencia emocional, popularizado gracias a la publicación de Daniel Goleman en 1995 sobre cómo los efectos de esta característica afectiva pueden influir notablemente en las decisiones cotidianas y puesto al mismo nivel que el coeficiente intelectual, se define como la capacidad de identificar, evaluar y controlar ciertas características emocionales propias y ajenas, tales como el estado de ánimo, la motivación, la frustración, la angustia, los impulsos no racionales o la empatía \cite{Goleman}.
 
-En este contexto, y en el intento de las computadoras de identificar el estado afectivo de un individuo, el sistema de reconocimiento ideal debería reunir las capacidades visuales y auditivas para capturar las expresiones faciales, los gestos y la entonación vocal con el fin de ser lo más riguroso posible. De forma adicional, otros aspectos que podrían enriquecer el resultado de la decisión final son la lectura de la temperatura corporal a través de la radiación infrarroja que emiten los cuerpos humanos, la actividad electrodérmica o la conductancia de la piel y el pulso \cite{Biosignals}.
+A pesar de ello, hasta la fecha, los investigadores que están intentando desarrollar ordenadores inteligentes se han centrado principalmente en la resolución de problemas, en el razonamiento, en el aprendizaje, en la percepción, en el lenguaje y en otras tantas tareas cognitivas de interés para este campo. De hecho, la mayoría de ellos no han tenido en cuenta la importante influencia de las emociones en estas funciones, y más cuando hay ciertas evidencias de que éstas juegan un papel fundamental en las atribuciones consideradas esenciales para la inteligencia en los humanos \cite{EmotionalIntelligence}. Por ello, este nuevo enfoque indica una clara necesidad de reconsideración del rol de las emociones en los ordenadores.
+
+En este contexto, y en el intento de las computadoras de identificar el estado afectivo de un individuo, el sistema de reconocimiento ideal debería reunir las capacidades visuales y auditivas para capturar las expresiones faciales, los gestos y la entonación vocal con el fin de ser lo más riguroso posible. De forma adicional, otros aspectos que podrían enriquecer el resultado de la decisión final son la lectura de la temperatura corporal a través de la radiación infrarroja que emiten los cuerpos humanos, la medición de la actividad electrodérmica o la conductancia de la piel y el pulso \cite{Biosignals}.
 
 Por lo tanto, es muy importante para la inteligencia afectiva artificial desarrollar formas de medir y aunar adecuadamente estas modulaciones, ya que pueden conducir a una mejor comprensión del estado emocional del sujeto. A pesar de ello, en este proyecto tan sólo se profundizará en el reconocimiento de las expresiones faciales, que individualmente se constituye como el módulo de mayor entropía desde el punto de vista de la identificación emocional.
 
@@ -34,7 +36,7 @@ En lo que respecta al proceso de aprendizaje del modelo en sí, es posible disti
   \item \textbf{Aprendizaje por refuerzo}. Se distingue por implementar un sistema de recompensa o castigo en función de las decisiones que un agente de \textit{software} ha tomado en un entorno dado para alcanzar un objetivo concreto.
 \end{itemize}
 
-Particularmente en este proyecto, el problema planteado está claramente vinculado con la categoría de aprendizaje supervisado ya que los datos de entrada a procesar están etiquetados con la expresión facial representada en la imagen.
+Particularmente en este proyecto y tal y como se podrá comprobar durante los siguientes capítulos, el planteamiento del problema del reconocimiento de emociones desde el punto de vista de las herramientas y de los conjuntos de datos empleados en este trabajo implica un acercamiento hacia la utilización de técnicas de aprendizaje supervisado.
 
 \subsection{Redes Neuronales Artificiales} \label{Chapter:ANN}
 
@@ -43,11 +45,11 @@ El aprendizaje supervisado tiene un conjunto de herramientas enfocadas a resolve
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{Images/analogy-neuron.png}
-    \caption{Imagen de una neurona biológica (izquierda) y su modelo matemático (derecha) \cite{CS231n}.}
+    \caption{Imagen de una neurona biológica (izquierda) y el modelo matemático que intenta reproducir superficialmente su funcionamiento (derecha) \cite{CS231n}.}
     \label{fig:analogy}
 \end{figure}
 
-Estas redes son un modelo computacional vagamente inspirado en las redes neuronales biológicas que constituyen los cerebros humanos \cite{ANN} y cuya analogía con el modelo matemático se puede observar en la \autoref{fig:analogy}. Cada una de estas neuronas recibe una serie de señales de entrada en sus dendritas y produce determinadas señales de salida que son trasladadas a lo largo del axón, el cual posteriormente se bifurca y se conecta a través de la sinapsis a las dendritas de otras neuronas. En el modelo computacional, por su parte, las señales que se desplazan a lo largo de los axones ($x_i$) interactúan de forma multiplicativa ($\omega_i\cdot x_i$) con las dendritas de otras neuronas en función de las fuerzas sinápticas (los pesos $\omega_i$), que son precisamente los elementos aprehensibles de los algoritmos de aprendizaje automático.  Estos pesos, por lo tanto, son los que controlan la intensidad y la dirección (sinapsis excitatoria --peso positivo-- o inhibitoria --peso negativo--) de influencia de una neurona sobre otra. En el modelo biológico, las dendritas trasladan estas señales provenientes de otras neuronas al cuerpo celular, donde su suma da lugar a un potencial excitatorio postsináptico, que en caso de superar un determinado umbral causará la generación de un impulso eléctrico o potencial de acción que será enviado a largo del axón de la propia neurona. Este proceso en el modelo computacional es menos complejo al considerar que la información se encuentra tan sólo en la frecuencia de disparo del potencial de acción. En base a esta interpretación, la descarga de una neurona artificial se modela con una función de activación no lineal que representa la frecuencia de los impulsos a lo largo del axón, es decir, se toma como entrada la intensidad de la señal después de la suma ($\sum\limits_{i=0}^n \omega_i\cdot x_i + b$) y se normaliza, típicamente, según el tipo de función de activación, obteniéndose una salida acotada. Cabe destacar que el parámetro $b$, ignorado en los próximos capítulos por razones de simplificación, es necesario para evitar interrupciones en el proceso de aprendizaje cuando las entradas inyectadas ($x_i$) son nulas.
+Estas redes son un modelo computacional vagamente inspirado en las redes neuronales biológicas que constituyen los cerebros humanos \cite{ANN} y cuya analogía con el modelo matemático se puede observar en la \autoref{fig:analogy}. Cada una de estas neuronas recibe una serie de señales de entrada en sus dendritas y produce determinadas señales de salida que son trasladadas a lo largo del axón, el cual posteriormente se bifurca y se conecta a través de la sinapsis a las dendritas de otras neuronas. En el modelo computacional, por su parte, las señales que se desplazan a lo largo de los axones ($x_i$) interactúan de forma multiplicativa ($\omega_i\cdot x_i$) con las dendritas de otras neuronas en función de las fuerzas sinápticas (los pesos $\omega_i$), que son precisamente los elementos aprehensibles de los algoritmos de aprendizaje automático. Estos pesos, por lo tanto, son los que controlan la intensidad y la dirección (sinapsis excitatoria --peso positivo-- o inhibitoria --peso negativo--) de influencia de una neurona sobre otra. En el modelo biológico, las dendritas trasladan estas señales provenientes de otras neuronas al cuerpo celular, donde su suma da lugar a un potencial excitatorio postsináptico, que en caso de superar un determinado umbral causará la generación de un impulso eléctrico o potencial de acción que será enviado a largo del axón de la propia neurona. Este proceso en el modelo computacional es menos complejo al considerar que la información se encuentra tan sólo en la frecuencia de disparo del potencial de acción. En base a esta interpretación, la descarga de una neurona artificial se modela con una función de activación no lineal que representa la frecuencia de los impulsos a lo largo del axón, es decir, se toma como entrada la intensidad de la señal después de la suma ($\sum\limits_{i=0}^n \omega_i\cdot x_i + b$) y se normaliza, típicamente, según el tipo de función de activación, obteniéndose una salida acotada. Cabe destacar que el parámetro $b$, ignorado en los próximos capítulos por razones de simplificación, es necesario para evitar interrupciones en el proceso de aprendizaje cuando las entradas inyectadas ($x_i$) son nulas.
 
 \begin{figure}
     \centering
@@ -60,8 +62,9 @@ Una ANN, por lo tanto, es una red estratificada de estas neuronas artificiales, 
 
 En definitiva, una ANN es un conjunto de funciones que realizan una predicción que es expresada, generalmente, como una distribución de probabilidad para todas las etiquetas. Esta predicción, posteriormente, es cuantificada con respecto al valor real correspondiente, obteniéndose una función de error o de pérdidas, la cual es utilizada para actualizar los pesos de las distintas capas con el fin de mejorar la predicción global. Esto se lleva a cabo, tradicionalmente, mediante el método de propagación hacia atrás de errores o retropropagación y cuyas características se analizarán en profundidad en la \autoref{Chapter:Backpropagation}.
 
-En cuanto al contexto histórico, estas redes, pese a formularse como un modelo para la realización de cálculos matemáticos en la década de los cuarenta \cite{McCulloch}, no fueron implementadas como tales hasta finales de los cincuenta, cuando fue presentada la arquitectura más simple de las ANN: el perceptrón \cite{Rosenblatt}. Este estaba formado por una serie de capas que contaban con un número determinado de nodos, cada uno de los cuales, excepto los de la entrada, representaban a una neurona biológica.
-Además, fue en este artículo precisamente en el que se introdujo la técnica de aprendizaje supervisado denominada retropropagación para entrenar las redes neuronales artificiales. 
+En cuanto al contexto histórico, las unidades neuronales fueron reconocidas por primera vez como elementos funcionales del sistema nervioso a finales del siglo XIX a través del trabajo de Santiago Ramón y Cajal. Mediante su estudio, gracias al cual obtuvo el Premio Nobel, propuso que estas células discretas interconectadas establecían una red compleja para la transmisión de la información. Esta descripción se conoce como la doctrina de la neurona y es el modelo aceptado a día de hoy en neurofisiología.
+
+Posteriormente, estas redes, pese a formularse como un modelo para la realización de cálculos matemáticos en la década de los cuarenta \cite{McCulloch}, no fueron implementadas como tales hasta finales de los cincuenta, cuando fue presentada la arquitectura más simple de las ANN: el perceptrón \cite{Rosenblatt}. Este estaba formado por una serie de capas que contaban con un número determinado de nodos, cada uno de los cuales, excepto los de la entrada, representaban justamente a una neurona biológica. Además, fue en este artículo  en el que se introdujo precisamente la técnica de aprendizaje supervisado denominada retropropagación para entrenar las redes neuronales artificiales. 
 
 A pesar de este gran paso, las limitaciones computacionales y de \textit{hardware} de la época (también existentes hoy en día), así como un enfoque de la investigación en inteligencia artificial hacia las representaciones simbólicas de los problemas, hizo que no fuera hasta principios de la década de los noventa cuando estas redes neuronales artificiales volvieran a cobrar protagonismo. Los responsables de ello fueron diversas publicaciones de una serie de modelos que explotaban las ANN, como la NETtalk \cite{NETtalk}, que mediante el aprendizaje automático fue capaz de aprender a leer en voz alta, o la ANN de múltiples capas desarrollada por Yann LeCun \cite{MNIST}, que permitía el reconocimiento de dígitos escritos a mano tomados de los códigos postales. Esta última publicación, de hecho, fue la pionera en integrar el reconocimiento de imágenes y el aprendizaje automático en un mismo modelo, además de introducir una serie de conceptos que posteriormente serían clave en el desarrollo de las Redes Neuronales Convolucionales (CNN), tales como la asignación de objetos según sus características a una serie de clases o la compartición de los pesos.
 
@@ -82,7 +85,7 @@ Por otro lado, el hecho de que hoy en día ya no se emplee el término de ANN, s
 
 En lo que respecta al ámbito de la visión por computador, el punto crítico también llegaría de la mano de Hinton dentro del contexto del Desafío del Reconocimiento Visual a Gran Escala (ILSVRC) \cite{ILSVRC}. Esta competición consiste en evaluar el desempeño de los modelos de los participantes en la clasificación de 100000 fotografías etiquetadas a mano con la presencia o ausencia de 1000 categorías de objetos diferentes. Su creación en 2010, así como de la base de datos ImageNet utilizada para el entrenamiento, tenían como objetivo motivar la investigación de \textit{software} enfocado al campo del reconocimiento visual. De hecho, el avance experimentado tan sólo dos años después de la aparición del ILSVRC es considerado ampliamente como el comienzo de la revolución del aprendizaje profundo, tanto en el entorno de investigación de la inteligencia artificial como en el de la industria tecnológica \cite{AIboom}. Este progreso estuvo marcado por la presentación, por parte de Alex Krizhevsky, Ilya Sutskever y Geoffrey Hinton, de un modelo capaz de reducir a la mitad la tasa de error existente en ese momento \cite{Krizhevsky}. El sistema desarrollado combinaba varios elementos críticos que se convertirían en los pilares fundamentales de los modelos de aprendizaje profundo: el entrenamiento mediante las Unidades de Procesamiento Gráfico (GPUs), las Redes Neuronales Convolucionales (CNN), el empleo de la Unidad Lineal Rectificada (ReLU) y del método para evitar el sobreentrenamiento, conocido como \textit{dropout}.
 
-\subsection{Uso de GPUs}
+\subsection{Empleo de las Unidades de Procesamiento Gráfico}
 
 Probablemente el componente más relevante e influyente dentro del explosivo progreso del aprendizaje profundo haya sido el uso de las Unidades de Procesamiento Gráfico en el entrenamiento de los modelos diseñados.
 
@@ -120,12 +123,12 @@ Algunas de estas arquitecturas, especialmente las más relevantes en el contexto
 \begin{itemize}
   \item \textbf{LeNet} \cite{LeNet-5}. Las primeras aplicaciones exitosas de las CNN fueron desarrolladas por Yann LeCun en la década de 1990. Entre ellas, la más conocida es la arquitectura LeNet, que se utilizó para leer los dígitos de los códigos postales.
   \item \textbf{AlexNet} \cite{Krizhevsky}. La publicación con la que se popularizó el uso de las CNN en el campo de la visión por computador fue la ya nombrada anteriormente AlexNet. Este modelo se presentó al desafío ILSVRC de ImageNet en 2012, superando al segundo finalista con una diferencia de más del 10\% en la tasa de error. En cuanto a su arquitectura, era muy similar a LeNet, con la diferencia de que presentaba capas convolucionales más profundas, más grandes y apiladas unas sobre otras, cuando lo común era tener capas convolucionales seguidas inmediatamente de capas de agrupación.
-  \item \textbf{GoogLeNet} \cite{GoogleNet}. El ganador del ILSVRC 2014 fue una CNN desarrollada por el grupo de investigación de inteligencia artificial de Google. Su principal contribución fue la introducción de un modelo con el que se consiguió reducir drásticamente la cantidad de parámetros en la red, pasando a contar con tan sólo 4 millones, un número más que razonable teniendo en cuenta los 60 millones de la red AlexNet. También cabe destacar las posteriores versiones de GoogLeNet desarrolladas, como Inception-v3 e Inception-v4, que, como se verá en el \autoref{Chapter:4}, son fundamentales en el presente proyecto.
+  \item \textbf{GoogLeNet} \cite{GoogleNet}. El ganador del ILSVRC 2014 fue una CNN desarrollada por el grupo de investigación de inteligencia artificial de Google. Su principal contribución fue la introducción de un modelo con el que se consiguió reducir drásticamente la cantidad de parámetros en la red, pasando a contar con tan sólo 4 millones, un número más que razonable teniendo en cuenta los 60 millones de la red AlexNet. También cabe destacar las posteriores versiones de GoogLeNet desarrolladas, como Inception-v3 e Inception-v4, que, como se verá en el \autoref{Chapter:5}, son fundamentales en el presente proyecto.
   \item \textbf{VGGNet} \cite{VGGNet}. Obtuvo el segundo puesto en el desafío ILSVRC 2014, aportando y desarrollando la idea de que la profundidad de la red es un componente crítico para la obtención de buenos resultados. Sin embargo, a pesar de  haber alcanzado una tasa de error más que razonable, este modelo presentaba una importante desventaja al contar con casi 140 millones de parámetros, haciéndolo muy costoso de entrenar y requiriendo, además, mucha memoria.
   \item \textbf{ResNet} \cite{ResNet}. Esta red residual fue la vencedora del ILSVRC 2015 al implementar una serie de conceptos clave como las conexiones directas entre capas no contiguas y la normalización por lotes, lo que además de acelerar la evaluación del modelo, favorecía la prevención del sobreaprendizaje. Actualmente, de hecho, las ResNet o sus variaciones son la opción predeterminada para implementar las CNN en la práctica \cite{ImpactResNet}.
 \end{itemize}
 
-\subsection{Retropropagación o propagación hacia atrás de errores} \label{Chapter:Backpropagation}
+\subsection{Retropropagación} \label{Chapter:Backpropagation}
 
 \begin{figure}
     \centering
@@ -136,68 +139,30 @@ Algunas de estas arquitecturas, especialmente las más relevantes en el contexto
 
 El procedimiento de la retropropagación para calcular el gradiente de una función de pérdidas con respecto a los pesos, posteriormente actualizados, de una serie de módulos multicapa no es más que una aplicación práctica y recursiva de la regla de la cadena para derivadas \cite{DeepLearning}. La idea clave es que el gradiente de la función objetivo con respecto a la entrada se calcula en la salida y se distribuye hacia atrás a través de las distintas capas de la red, tal y como puede apreciarse en la \autoref{fig:backpropagation}. De esta manera, la ecuación de la retropropagación puede aplicarse repetidamente para propagar los gradientes a través de todos los módulos, desde la parte superior, donde la red genera una predicción determinada, hasta la parte inferior, donde es alimentada la entrada con datos externos. Esta propagación, sin embargo, no es uniforme, sino que cada una de las neuronas de las capas ocultas tan sólo recibe una fracción de la señal total de error correspondiente a la contribución relativa que aporta a la salida original. Posteriormente, una vez que estos gradientes analíticos se calculan, son utilizados para realizar una actualización de los parámetros de la red mediante un optimizador. Hay numerosos enfoques para realizar esta actualización, discutidos en la \autoref{Chapter:Optimizers}.
 
-El pseudocódigo completo de este proceso se muestra en el \autoref{alg:Backpropagation}.
-\begin{algorithm}
-\caption{Algoritmo de retropropagación}
-\label{alg:Backpropagation}
-\begin{algorithmic}[1]
-    \Function{Backpropagation}{datos, red}
-        \State \VARIABLES pesos ($\omega_{i,j}$), tasa de aprendizaje ($\lambda$)
-        \ForEach{$\omega_{i,j}$ \IN red} \Comment{Inicialización de parámetros}
-            \State $\omega_{i,j} \gets$ pequeño valor aleatorio
-        \EndFor
-        \Repeat
-            \ForEach{$x$ \IN datos} \Comment{Propagación de entradas\slash Obtención de salidas}
-                \ForEach{neurona $j$ \IN capa i = 0} 
-                    \State $\alpha_{0,j} \gets x$ \Comment{Asignación de las entradas}
-                \EndFor
-                \For{capa i = 1 \TO capa i = k}
-                    \ForEach{neurona $j$ \IN capa i} 
-                        \State $s_{i,j} \gets \sum\limits_{j} \omega_{i,j}\cdot \alpha_{i-1,j}$
-                        \State $\alpha_{i,j} \gets f(s_{i,j})$ \Comment{Aplicación de la función de activación}
-                    \EndFor
-                \EndFor
-                \ForEach{neurona $j$ \IN capa i = k} \Comment{Propagación hacia atrás}
-                    \State $\Delta_{k,j} \gets f'(s_{k,j})\cdot (y_{k,j} - \alpha_{k,j})$ \textcolor{blue}{\footnotemark[1]}
-                \EndFor
-                \For{capa i = k-1 \TO capa i = 0}
-                    \ForEach{neurona $j$ \IN capa i}
-                        \State $\Delta_{i,j} \gets f'(s_{i,j})\cdot \sum\limits_{j} \omega_{i,j}\cdot \Delta_{i+1,j}$ \textcolor{blue}{\footnotemark[1]}
-                    \EndFor
-                \EndFor
-                \ForEach{$\omega_{i,j}$ \IN red} \Comment{Actualización de los pesos}
-                    \State $\omega_{i,j} \gets \omega_{i,j} - \lambda \cdot \alpha_{i,j} \cdot \Delta_{i,j}$ \Comment{Descenso Estocástico del Gradiente}
-                \EndFor
-            \EndFor
-        \Until todos los datos se clasifican correctamente \OR satisfacción de otro criterio
-        \State \Return red
-    \EndFunction
-\end{algorithmic}
-\textcolor{blue}{\footnotesize{\\ $^1$ Conversión de la derivada de error con respecto a la salida en la derivada de error con respecto a la entrada multiplicándola por el gradiente de $f(s_{i,j})$.}}
-\end{algorithm}
+El pseudocódigo completo de este proceso se explica detalladamente en el \autoref{alg:Backpropagation} del \autoref{Appendix:Algorithms}.
 
-\subsection{Actualización de parámetros: SGD con Nesterov Momentum y Adam} \label{Chapter:Optimizers}
+\subsection{Actualización de parámetros} \label{Chapter:Optimizers}
 
 Actualmente, los dos métodos más empleados y recomendados para realizar la actualización de parámetros, con el objetivo de encontrar una serie de pesos $\omega_{i,j}$ que minimicen la función de pérdidas, son el Descenso Estocástico del Gradiente (SGD) con Nesterov Momentum y la Estimación del Momento Adaptativo (Adam) \cite{CS231n}.
 
-\subsubsection{SGD con Nesterov Momentum}
+\subsubsection{Descenso Estocástico del Gradiente con Nesterov Momentum}
 
-La forma más simple y común de llevar a cabo la optimización es, precisamente, mediante SGD, que permite modificar los parámetros en la dirección negativa del gradiente, al apuntar éste en la dirección del máximo en cada uno de los puntos evaluados, con el fin de minimizar la función de pérdidas:
-\begin{align*}
+La forma más simple y común de llevar a cabo la optimización es, precisamente, mediante SGD, que permite modificar los parámetros en la dirección negativa del gradiente (\autoref{eq:SGD}), al apuntar éste en la dirección del máximo en cada uno de los puntos evaluados, con el fin de minimizar la función de pérdidas.
+\begin{align} \label{eq:SGD}
     \omega_t &= \omega_{t-1} - \lambda \cdot \nabla f(\omega_{t-1}) \\
-    \text{donde}~
-    \omega_t &\equiv \text{peso en un instante determinado,} \\
-    \lambda &> 0 \text{\space es la tasa de aprendizaje}
-\end{align*}
+    \text{donde}~  
+    \omega_t &\equiv \text{peso en un instante determinado,} \notag \\
+    \lambda &> 0 \text{\space es la tasa de aprendizaje} \notag
+\end{align}
 
-Los métodos Momentum, por su parte, presentan un enfoque que ofrece mejores tasas de convergencia, ya que emplean el gradiente para actualizar los parámetros de una forma más efectiva al acumular velocidad en las direcciones que reducen continuamente la función de pérdidas:
-\begin{align*}
+Los métodos Momentum, por su parte, presentan un enfoque que ofrece mejores tasas de convergencia, ya que emplean el gradiente para actualizar los parámetros de una forma más efectiva al acumular velocidad en las direcciones que reducen continuamente la función de pérdidas, tal y como se muestra en la \autoref{eq:SGDMomentum}. 
+\begin{align}
     v_t &= \mu \cdot v_{t-1} - \lambda \cdot \nabla f(\omega_{t-1}) \\
-    \omega_t &= \omega_{t-1} + v_t \\
+    \omega_t &= \omega_{t-1} + v_t \label{eq:SGDMomentum} \\ 
     \text{donde}~
-    v &\equiv \text{ vector de velocidad,} \\
-    \mu &\in [0,1] \text{\space es el momento lineal}
-\end{align*}
+    v &\equiv \text{ vector de velocidad,} \notag \\
+    \mu &\in [0,1] \text{\space es el momento lineal} \notag
+\end{align}
 
 \begin{figure}
     \centering
@@ -206,13 +171,13 @@ Los métodos Momentum, por su parte, presentan un enfoque que ofrece mejores tas
     \label{fig:NesterovMomentum}
 \end{figure}
 
-Nesterov Momentum, a su vez, también goza de mayores garantías teóricas de convergencia, funcionando ligeramente mejor en la práctica que el método Momentum estándar \cite{Sutskever}. En la \autoref{fig:NesterovMomentum} se puede observar la comparación, haciéndose evidente el aumento de la eficacia de este último procedimiento, que da primero los saltos en la dirección del gradiente acumulado anterior para posteriormente calcular el gradiente en la posición actualizada y realizar una corrección:
-\begin{align*}
-    v_t &= \mu \cdot v_{t-1} - \lambda \cdot \nabla f(\overbrace{\omega_{t-1} + \mu \cdot v_{t-1}}^{w_{salto}})\\
-    \overbrace{\omega_t}^{w_{corregido}} &= \omega_{t-1} + v_t
-\end{align*}
+Nesterov Momentum, a su vez, también goza de mayores garantías teóricas de convergencia, funcionando ligeramente mejor en la práctica que el método Momentum estándar \cite{Sutskever}. En la \autoref{fig:NesterovMomentum} se puede observar la comparación, haciéndose evidente el aumento de la eficacia de este último procedimiento representado mediante la \autoref{eq:SGDNesterovMomentum}, que da primero los saltos en la dirección del gradiente acumulado anterior para posteriormente calcular el gradiente en la posición actualizada y realizar una corrección.
+\begin{align} 
+    v_t &= \mu \cdot v_{t-1} - \lambda \cdot \nabla f(\overbrace{\omega_{t-1} + \mu \cdot v_{t-1}}^{w_{salto}}) \\
+    \overbrace{\omega_t}^{w_{corregido}} &= \omega_{t-1} + v_t \label{eq:SGDNesterovMomentum}
+\end{align}
 
-\subsubsection{Adam}
+\subsubsection{Estimación del Momento Adaptativo}
 
 Al contrario que el método del descenso estocástico del gradiente, que permite manipular la tasa de aprendizaje de forma global e idéntica para toda la red, Adam adapta la tasa de aprendizaje a cada uno de los parámetros presentes en el modelo. En el artículo que describe este algoritmo, los autores exponen a Adam como la combinación de dos de las extensiones de SGD \cite{Adam}:
 \begin{itemize}
@@ -220,26 +185,26 @@ Al contrario que el método del descenso estocástico del gradiente, que permite
   \item \textbf{Propagación del Valor Cuadrático Medio (RMSProp)}, que también explota las tasas de aprendizaje adaptativas, basadas en este caso en el promedio de las magnitudes recientes de los gradientes, lo que proporciona buenos resultados para problemas ruidosos. 
 \end{itemize}
 
-De esta forma, Adam, además de almacenar un promedio del primer momento (la media), como en RMSProp, también utiliza el promedio de los segundos momentos de los gradientes (la varianza):
-\begin{align*}
+De esta forma, Adam, además de almacenar un promedio del primer momento (la media), como en RMSProp, también utiliza el promedio de los segundos momentos de los gradientes (la varianza) para la actualización de los parámetros, proceso que se rige por la \autoref{eq:Adam}.
+\begin{align}
     m_t &= \beta_1 \cdot m_{t-1} + (1 - \beta_1) \cdot \nabla f(\omega_{t-1}) \\
     v_t &= \beta_2 \cdot v_{t-1} + (1 - \beta_2) \cdot \nabla^2 f(\omega_{t-1}) \\
     \hat{m}_t &= m_t / (1 - \beta_1^t) \\
     \hat{v}_t &= v_t / (1 - \beta_2^t) \\
-    \omega_t &= \omega_{t-1} - \lambda \cdot \hat{m}_t / (\sqrt{\hat{v}_t} + \epsilon) \\
+    \omega_t &= \omega_{t-1} - \lambda \cdot \hat{m}_t / (\sqrt{\hat{v}_t} + \epsilon) \label{eq:Adam} \\
     \text{donde}~
-    \lambda &> 0 \text{\space es la tasa de aprendizaje,} \\
-    m_t \text{\space y \space} v_t &\equiv \text{estimaciones del primer y segundo momento,} \\
-    \hat{m}_t \text{\space y \space} \hat{v}_t &\equiv \text{estimaciones del primer y segundo momento corregidas}
-\end{align*}
+    \lambda &> 0 \text{\space es la tasa de aprendizaje,} \notag \\
+    m_t \text{\space y \space} v_t &\equiv \text{estimaciones del primer y segundo momento,} \notag \\
+    \hat{m}_t \text{\space y \space} \hat{v}_t &\equiv \text{estimaciones del primer y segundo momento corregidas} \notag
+\end{align}
 
-De forma específica, este algoritmo calcula un promedio exponencial del gradiente ($m_t$) y del gradiente cuadrado ($v_t$), cuyas tasas de descenso son controladas mediante los parámetros $\beta_1$ y $\beta_2$. Por otro lado, como $m_t$ y $v_t$ son inicialmente nulos, es necesario aplicarles una corrección para evitar su sesgado hacia cero, especialmente notable durante las primeras iteraciones. Tras ello, se realiza la actualización de los parámetros de manera análoga al método del descenso estocástico del gradiente.
+De forma específica, este algoritmo englobado en la \autoref{eq:Adam} calcula en un primer momento un promedio exponencial del gradiente ($m_t$) y del gradiente cuadrado ($v_t$), cuyas tasas de descenso son controladas mediante los parámetros $\beta_1$ y $\beta_2$. Por otro lado, como $m_t$ y $v_t$ son inicialmente nulos, es necesario aplicarles una corrección para evitar su sesgado hacia cero, especialmente notable durante las primeras iteraciones. Tras ello, se realiza la actualización de los parámetros de manera análoga al método del descenso estocástico del gradiente.
 
 \section{Trabajos Relacionados}
 
 La tarea del reconocimiento de expresiones faciales puede abordarse desde múltiples puntos de vista, abarcando áreas como el procesamiento de señales, la visión por computador o el aprendizaje automático. Precisamente la combinación de estas técnicas es la que ofrece el entorno idóneo para el desarrollo e implementación de los sistemas de identificación de emociones.
 
-En estas circunstancias, es destacable la labor del grupo de investigación comercial Affectiva, que es el líder mundial en reconocimiento de emociones. Su metodología se basa en técnicas de aprendizaje profundo aplicadas a la detección y seguimiento de rostros, a la diarización del hablante, a la detección de la voz y la clasificación de las emociones a partir de las expresiones faciales y del habla. Además, cabe destacar que los servicios ofrecidos por esta compañía son independientes de factores culturales o regionales dada la extensión de sus bases de datos \cite{Affectiva}, contando, por ejemplo, con casi 6 millones de representaciones faciales de 75 países diferentes. Este número es extraordinariamente elevado teniendo en cuenta que la mayoría de los conjuntos de entrenamiento públicos ni si quiera alcanzan las 50000 imágenes.
+En estas circunstancias, es destacable la labor del grupo de investigación comercial Affectiva, que es el líder mundial en reconocimiento de emociones. Su metodología se basa en técnicas de aprendizaje profundo aplicadas a la detección y seguimiento de rostros, a la transcripción de conversaciones, a la detección de la voz y a la clasificación de las emociones a partir de las expresiones faciales y del habla. Además, cabe destacar que los servicios ofrecidos por esta compañía son independientes de factores culturales o regionales dada la extensión de sus bases de datos \cite{Affectiva}, contando, por ejemplo, con casi 6 millones de representaciones faciales de 75 países diferentes. Este número es extraordinariamente elevado teniendo en cuenta que la mayoría de los conjuntos de entrenamiento públicos ni si quiera alcanzan las 50000 imágenes.
 
 En lo que respecta a un enfoque más similar a lo desarrollado en este escrito, tanto por el uso de la misma base de datos (FER-2013 \cite{FER-2013}, analizada en profundidad en la \autoref{Chapter:FER-2013}) como por la metodología empleada, es necesario señalar las siguientes implementaciones:
 \begin{itemize}

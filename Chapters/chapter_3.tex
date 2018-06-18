@@ -44,15 +44,15 @@ Por último, hace falta mencionar que la elección de Google Cloud Plataform en 
 
 En el proceso de desarrollo del sistema de reconocimiento de emociones de este proyecto se emplean, directa o indirectamente, tres tipos de bases de datos distintas. Por un lado se hace uso de los conjuntos de datos ImageNet \cite{ImageNet} y VGGFace2 \cite{VGGFace2}, que son precisamente los aprendidos por los modelos preentrenados ofrecidos por Keras. Por el otro destaca FER-2013 \cite{FER-2013}, que es la base de datos mediante la cual se va a realizar el afinamiento de los sistemas iniciales para dotarlos de la capacidad de reconocer expresiones faciales.
 
-\subsection{ImageNet}
+\subsection{ImageNet} \label{Chapter:ImageNet}
 
-ImageNet es una base de datos visual enfocada en la investigación de \textit{software} para el reconocimiento de objetos visuales y compuesta por tres subconjuntos de datos: entrenamiento (1.2 millones de imágenes), validación (50000 imágenes) y evaluación (100000 imágenes). Estas fotografías, recopiladas de Flickr y otros motores de búsqueda, están etiquetadas a mano indicando la presencia o ausencia de 1000 categorías de objetos, los cuales abarcan ámbitos tan diversos como razas de perro, especies de plantas u hongos, distintos objetos cotidianos o personas.
+ImageNet es una base de datos visual enfocada en la investigación de \textit{software} para el reconocimiento de objetos visuales y compuesta por tres subconjuntos de datos: entrenamiento (1.2 millones de imágenes), validación (50\,000 imágenes) y evaluación (100\,000 imágenes). Estas fotografías, recopiladas de Flickr y otros motores de búsqueda, están etiquetadas a mano indicando la presencia o ausencia de 1\,000 categorías de objetos, los cuales abarcan ámbitos tan diversos como razas de perro, especies de plantas u hongos, distintos objetos cotidianos o personas.
 
 Esta amplitud, heterogeneidad y no superposición de clases es la que ha convertido precisamente a ImageNet en el punto de referencia para los algoritmos de clasificación de imágenes, dominados por las redes neuronales convolucionales y las técnicas de aprendizaje profundo desde 2012. Por esta razón, de hecho, gran parte de los modelos que mejor rendimiento han obtenido con esta base de datos se han incluido en la biblioteca de Keras.
 
-\subsection{VGGFace2}
+\subsection{VGGFace2} \label{Chapter:VGGFace2}
 
-Esta base de datos contiene 3.31 millones de imágenes faciales de 9131 sujetos célebres, con un promedio de 362.6 fotografías por individuo y con una gran diversidad de poses, de edades, de iluminación, de etnias y de profesiones. Todo este conjunto de datos se divide en un grupo de entrenamiento de 8631 individuos y en uno de pruebas de 500 individuos. Además, VGGFace2 proporciona anotaciones que permiten la evaluación de los distintos sujetos en dos escenarios diferentes: coincidencia de rostros de diferentes posturas y coincidencia de rostros de diferentes edades.
+Esta base de datos contiene 3.31 millones de imágenes faciales de 9\,131 sujetos célebres, con un promedio de 362.6 fotografías por individuo y con una gran diversidad de poses, de edades, de iluminación, de etnias y de profesiones. Todo este conjunto de datos se divide en un grupo de entrenamiento de 8\,631 individuos y en uno de pruebas de 500 individuos. Además, VGGFace2 proporciona anotaciones que permiten la evaluación de los distintos sujetos en dos escenarios diferentes: coincidencia de rostros de diferentes posturas y coincidencia de rostros de diferentes edades.
 
 \subsection{FER-2013} \label{Chapter:FER-2013}
 
@@ -63,14 +63,14 @@ Esta base de datos contiene 3.31 millones de imágenes faciales de 9131 sujetos 
     \label{fig:FER-2013}
 \end{figure}
 
-FER-2013 es la base de datos estáticos de expresiones faciales de mayor relevancia disponible públicamente. Consta de 35887 representaciones en escala de grises adquiridas de entornos no acondicionados expresamente con una resolución de $48 \times 48$ píxeles. Este conjunto reúne rostros de distinta naturaleza en términos de edad, orientación de la cara, etnia y género, tal y como puede observase en la \autoref{fig:FER-2013} y está dividido en tres subgrupos: entrenamiento, validación y evaluación con 28709, 3589 y 3589 muestras respectivamente. Asimismo, cada una de las imágenes está etiquetada con respecto a la expresión manifestada por el sujeto en la fotografía.
+FER-2013 es la base de datos estáticos de expresiones faciales de mayor relevancia disponible públicamente. Consta de 35\,887 representaciones en escala de grises adquiridas de entornos no acondicionados expresamente con una resolución de $48 \times 48$ píxeles. Este conjunto reúne rostros de distinta naturaleza en términos de edad, orientación de la cara, etnia y género, tal y como puede observase en la \autoref{fig:FER-2013} y está dividido en tres subgrupos: entrenamiento, validación y evaluación con 28\,709, 3\,589 y 3\,589 muestras respectivamente. Asimismo, cada una de las imágenes está etiquetada con respecto a la expresión manifestada por el sujeto en la fotografía.
 
 \begin{table}
 \centering
 \begin{tabular}{c|c|c|c|c|c|c|c|}
     \cline{2-8}
     & \textbf{Ira} & \textbf{Asco} & \textbf{Miedo} & \textbf{Alegría} & \textbf{Tristeza} & \textbf{Sorpresa} & \textbf{Neutral} \\ \hline
-    \multicolumn{1}{|c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Núm. de\\ imágenes\end{tabular}}} & 4953 & 547 & 5121 & 8989 & 6077 & 4002 & 6198 \\ \hline
+    \multicolumn{1}{|c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Núm. de\\ imágenes\end{tabular}}} & 4\,953 & 547 & 5\,121 & 8\,989 & 6\,077 & 4\,002 & 6\,198 \\ \hline
 \end{tabular}
 \caption{Número de imágenes por cada expresión facial de la base de datos FER-2013.}
 \label{Table:FER-2013}

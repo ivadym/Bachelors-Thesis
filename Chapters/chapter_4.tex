@@ -42,7 +42,7 @@ La función principal de la capa de agrupación o de \textit{pooling} es la de r
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{Images/Pooling.png}
-    \caption{Operación de \textit{pooling} o de reducción de muestreo con un filtro de dimensión $2\times 2$ y paso de 2 unidades de píxel \cite{CS231n}.}
+    \caption{Operación de \textit{max pooling} o de reducción de muestreo con un filtro de dimensión $2\times 2$ y paso de 2 unidades de píxel \cite{CS231n}.}
     \label{fig:Pooling}
 \end{figure}
 
@@ -50,11 +50,14 @@ Existen varios esquemas posibles para realizar esta agrupación mediante la cual
 \begin{itemize}
   \item \textbf{Agrupación máxima (\textit{Max pooling})}. Toma el valor máximo de los píxeles de un bloque determinado.
   \item \textbf{Agrupación promedio (\textit{Average pooling})}. Calcula y toma el valor medio de un área de píxeles definida.
+  \item \textbf{Agrupación promedio global (\textit{Global Average pooling})}. Presenta el mismo funcionamiento que la capa de agrupación promedio con la diferencia de que reduce los mapas de activación de cada dimensión a un único valor. 
 \end{itemize}
 
-Tal y como se puede observar en la \autoref{fig:Pooling}, ambos métodos dan lugar a una reducción del tamaño de los datos por un factor igual a la dimensión de la ventana sobre la cual se opera o de destino, por lo que es común insertarlas periódicamente entre las sucesivas capas convolucionales en una arquitectura CNN \cite{CS231n}.
+Tal y como se puede observar en la \autoref{fig:Pooling}, los métodos de agrupación máxima y promedio dan lugar a una reducción del tamaño de los datos por un factor igual a la dimensión de la ventana sobre la cual se opera o de destino, por lo que es común insertarlas periódicamente entre las sucesivas capas convolucionales en una arquitectura CNN \cite{CS231n}.
 
 En la práctica y a pesar de que la agrupación promedio ha sido ampliamente explotada históricamente, la operación de agrupación máxima presenta un mejor funcionamiento al conservar de forma más eficaz las características más importantes de la imagen, haciendo que la red sea invariante a pequeñas transformaciones y distorsiones \cite{Pooling}.
+
+En lo que respecta a la agrupación promedio global, esta es vista como un regularizador estructural que explícitamente exige una correspondencia entre los mapas de activación y las clases de correspondencia \cite{NetworkInNetwork}. Es por este motivo por el cual es común incorporarlas en las etapas finales de los modelos y, al ser menos propensa al sobreaprendizaje, como alternativa a las capas totalmente conectadas.
 
 \subsection{Capa Totalmente Conectada}
 

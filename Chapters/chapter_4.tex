@@ -11,7 +11,6 @@ En otros términos, la disposición de la arquitectura convolucional más habitu
     &\boxed{\text{Entrada}} \rightarrow \boxed{\boxed{\text{Capa Convolucional} \rightarrow \text{Capa ReLU}} \times \textbf{N} \rightarrow \text{Capa \textit{Pooling}}} \times \textbf{M} \rightarrow \\ 
     & \boxed{\text{Capa Totalmente Conectada} \rightarrow \text{Capa ReLU}} \times \textbf{K} \rightarrow \boxed{\text{Capa Totalmente Conectada}}
 \end{align*}
-
 También cabe destacar que cada una de las capas que a continuación se detallan son ofrecidas como funciones particulares por la API de Keras.
 
 \subsection{Capa Convolucional}
@@ -30,7 +29,6 @@ La capa convolucional es el componente básico de una CNN y sobre la que recae l
     I &\equiv \text{imagen bidimensional de entrada,} \notag \\
     K &\equiv \text{matriz de convolución o \textit{kernel} de dimensión $h\times w$} \notag
 \end{align}
-
 Esta compartición de pesos a lo largo de todo el campo visual es precisamente la que permita que todas las neuronas de una capa convolucional respondan de forma uniforme a una característica concreta, independientemente de su posición. Consecuentemente, la red aprenderá los filtros o pesos que se activan con algún tipo de singularidad visual, como bordes o manchas de algún color específico en las primeras capas o patrones enteros en las capas superiores. Finalmente, el volumen de salida se obtiene apilando los mapas de activación a lo largo de la dimensión de profundidad.
 
 Por último, es necesario remarcar que la agrupación sucesiva de estas capas convolucionales tiene como fin la imposición de una arquitectura compuesta de filtros no lineales que, conforme aumenta la profundidad de la red, se van haciendo más globales y por lo tanto más sensibles a regiones más amplias del espacio de píxeles.
@@ -82,7 +80,6 @@ En la actualidad, la función no lineal más popular es la Unidad Lineal Rectifi
 \begin{align} \label{eq:ReLU}
     f(x) &= max(0, x) 
 \end{align}
-
 \begin{figure}
     \centering
     \includegraphics[scale=0.6]{Images/ReLU.png}
@@ -96,7 +93,7 @@ A pesar de todo ello, mediante la función de activación ReLU no es posible com
 
 Tal y como puede observarse en la \autoref{eq:SoftMax}, esta función toma un vector N-dimensional y evalúa cada uno de sus elementos dentro del rango $[0, 1]$, cuya suma, además, pasa a ser la unidad, lo que proporciona un entorno especialmente adecuado para la interpretación probabilística en las tareas de clasificación multiclase.
 \begin{align} \label{eq:SoftMax}
-    p_i &= \frac{e^{f_{y_i}}}{\sum\limits_{j=1}^{N} e^{f_j}} & \forall \text{\space} i \in \text{1...N} \\
+    p_i &= \frac{e^{f_{y_i}}}{\sum\limits_{j=1}^{N} e^{f_j}} & \forall \text{\space} i \in \text{$1$...$N$} \\
     \text{donde}~ 
     f_j &\equiv \text{elemento $j$-ésimo del vector de probabilidades} \notag
 \end{align}
@@ -113,12 +110,12 @@ Por último, es necesario indicar que el pseudocódigo de este proceso de normal
 
 \subsection{Capa de \textit{Dropout}}
 
-La operación de \textit{Droput} es una técnica que permite evitar el sobreaprendizaje, proporcionando una forma de combinar, aproximadamente y de forma exponencial, distintas arquitecturas neuronales de un mismo modelo de manera eficiente \cite{Srivastava}. 
+La operación de \textit{droput} es una técnica que permite evitar el sobreaprendizaje, proporcionando una forma de combinar, aproximadamente y de forma exponencial, distintas arquitecturas neuronales de un mismo modelo de manera eficiente \cite{Srivastava}. 
 
 \begin{figure}
     \centering
     \includegraphics[scale=0.25]{Images/Dropout.png}
-    \caption{Red neuronal estándar con 2 capas ocultas (izquierda) y red análoga a la anterior a la que se le ha aplicado la operación de \textit{Dropout} (derecha) \cite{Srivastava}.}
+    \caption{Red neuronal estándar con 2 capas ocultas (izquierda) y red análoga a la anterior a la que se le ha aplicado la operación de \textit{dropout} (derecha) \cite{Srivastava}.}
     \label{fig:Dropout}
 \end{figure}
 
@@ -154,7 +151,7 @@ En el campo del aprendizaje profundo, donde el tamaño de las bases de datos tie
 
 De esta forma y teniendo en cuenta las limitaciones de la mayoría de las bases de datos, se hace evidente que el empleo de estas técnicas puede dar lugar a mejoras considerables de los resultados. Asimismo, en el contexto de la clasificación de imágenes de expresiones faciales, donde los datos, en la mayoría de los casos, son inadecuados o insuficientes y la distribución de clases desequilibrada, parece resultar especialmente adecuado el empleo de las redes generativas y de las transformaciones geométricas para mejorar el conjunto de entrenamiento.
 
-\subsection{Transformaciones Geométricas}
+\subsection{Transformaciones Geométricas} \label{Chapter:GeometricTransformations}
 
 Con el objetivo de aprovechar lo máximo posible el conjunto de entrenamiento, las transformaciones geométricas pretenden extender la heterogeneidad de los datos de entrada de modo que durante el aprendizaje el modelo entrenado no procese más de una vez la misma imagen. De esta forma se consigue prevenir el sobreaprendizaje y obtener una mejor generalización mediante la alimentación del sistema con unos datos que presentan características diferentes en cada iteración del proceso de entrenamiento.
 
@@ -177,7 +174,6 @@ En la \autoref{fig:GAN} se muestra la estructura de este tipo de redes caracteri
 \begin{align} \label{eq:GAN}
     \underset{G}{min} \ \underset{D}{max} \ \mathcal{V}(D, G) &= \underbrace{\mathbb{E}_{x\sim p_{datos}(x)} \big[\log D(x)\big]}_{1^{er} \ t\acute{e}rmino} \ + \ \underbrace{\mathbb{E}_{z\sim p_{z}(z)} \big[\log (1- D(G(z)))\big]}_{2^{o} \ t\acute{e}rmino}
 \end{align}
-
 En definitiva, esta técnica permite generar imágenes que parecen, al menos superficialmente, auténticas para los observadores humanos a partir de otras que están parcialmente relacionadas con el resultado que se quiere obtener.
 
 \subsubsection{Redes Generativas Antagónicas de Ciclo Consecuente}
@@ -198,7 +194,6 @@ En la \autoref{fig:cycleGAN} se puede observar la estructura simplificada de est
     \mathcal{L}_{cycleGAN}(G, F) &= \mathbb{E}_{x\sim p_{datos}(x)} \big[\norm{F(G(x)) - x}\big] + \notag \\ &\quad \mathbb{E}_{y\sim p_{datos}(y)} \big[\norm{G(F(y)) - y}\big] \label{eq:CycleGANLoss}\\
     \lambda &\equiv \text{peso de la función de pérdidas de ciclo consecuente} \notag
 \end{align}
-
 En esta ocasión no sólo se pretende hacer que las imágenes generadas se perciban como las imágenes objetivo, sino que también las reconstruidas sean identificadas como las originales, garantizándose así la consistencia del ciclo. Es por ello que se introduce el término de la \autoref{eq:CycleGANLoss}, el cual tiene en consideración el error existente entre las representaciones de entrada y sus reconstrucciones obtenidas al pasar a través de las dos funciones de mapeo, $G$ y $F$.
 
 Resumidamente, en el ámbito particular de este proyecto, la utilización de estas redes tiene como fin el aumento del número de imágenes que tienen menor representación de la base de datos de expresiones faciales FER-2013 para obtener un mejor comportamiento del sistema final.

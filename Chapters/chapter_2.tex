@@ -154,7 +154,6 @@ La forma más simple y común de llevar a cabo la optimización es, precisamente
     \omega_t &\equiv \text{peso en un instante determinado,} \notag \\
     \lambda &> 0 \text{\space es la tasa de aprendizaje} \notag
 \end{align}
-
 Los métodos Momentum, por su parte, presentan un enfoque que ofrece mejores tasas de convergencia, ya que emplean el gradiente para actualizar los parámetros de una forma más efectiva al acumular velocidad en las direcciones que reducen continuamente la función de pérdidas, tal y como se muestra en la \autoref{eq:SGDMomentum}. 
 \begin{align}
     v_t &= \mu \cdot v_{t-1} - \lambda \cdot \nabla f(\omega_{t-1}) \\
@@ -163,7 +162,6 @@ Los métodos Momentum, por su parte, presentan un enfoque que ofrece mejores tas
     v &\equiv \text{ vector de velocidad,} \notag \\
     \mu &\in [0,1] \text{\space es el momento lineal} \notag
 \end{align}
-
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{Images/NesterovMomentum.png}
@@ -197,7 +195,6 @@ De esta forma, Adam, además de almacenar un promedio del primer momento (la med
     m_t \text{\space y \space} v_t &\equiv \text{estimaciones del primer y segundo momento,} \notag \\
     \hat{m}_t \text{\space y \space} \hat{v}_t &\equiv \text{estimaciones del primer y segundo momento corregidas} \notag
 \end{align}
-
 De forma específica, este algoritmo englobado en la \autoref{eq:Adam} calcula en un primer momento un promedio exponencial del gradiente ($m_t$) y del gradiente cuadrado ($v_t$), cuyas tasas de descenso son controladas mediante los parámetros $\beta_1$ y $\beta_2$. Por otro lado, como $m_t$ y $v_t$ son inicialmente nulos, es necesario aplicarles una corrección para evitar su sesgado hacia cero, especialmente notable durante las primeras iteraciones. Tras ello, se realiza la actualización de los parámetros de manera análoga al método del descenso estocástico del gradiente.
 
 \section{Trabajos Relacionados} \label{Chapter:RelatedWork}

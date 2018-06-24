@@ -41,7 +41,7 @@ En cuanto a la entrada y puesto que las imágenes del conjunto de datos FER-2013
 
 \subsection{Inception-ResNet-v2}
 
-Inception-ResNet-v2 es una ampliación, llevada a cabo por el grupo de inteligencia artificial de Google, de los conceptos planteados en la arquitectura Inception-v3 mediante dos metodologías que tienen como fin aumentar el rendimiento y el número de módulos Inception. La primera consiste simplemente en el empleo de una estructura ligeramente distinta dentro de los propios bloques en función de la posición de éstos en la red, mientras que la segunda, por su parte, plantea la utilización de conexiones residuales, similares a las desarrolladas por el equipo de Microsoft en las redes ResNet \cite{ResNet}, para acelerar el proceso de entrenamiento. Estas conexiones, además, favorecen la simplificación de los bloques Inception. En definitiva, estas dos ideas permiten alcanzar e incluso superar el rendimiento de los modelos puros de Inception con un número significativamente menor de iteraciones de entrenamiento.
+Inception-ResNet-v2 es una ampliación, llevada a cabo por el grupo de inteligencia artificial de Google, de los conceptos planteados en la arquitectura Inception-v3 mediante dos metodologías que tienen como fin aumentar el rendimiento y el número de módulos Inception. La primera consiste simplemente en el empleo de una estructura ligeramente distinta dentro de los propios bloques en función de la posición de éstos en la red, mientras que la segunda, por su parte, plantea la utilización de conexiones residuales, similares a las desarrolladas por el equipo de Microsoft en las redes ResNet \cite{ResNet}, para acelerar el proceso de entrenamiento y aumentar la profundidad de la arquitectura. Estas conexiones, además, favorecen la simplificación de los bloques Inception. En definitiva, estas dos ideas permiten alcanzar e incluso superar el rendimiento de los modelos puros de Inception con un número significativamente menor de iteraciones de entrenamiento.
 
 \begin{figure}
     \centering
@@ -92,7 +92,9 @@ Inception-ResNet-v2 es una ampliación, llevada a cabo por el grupo de inteligen
     \label{fig:Inception-ResNet-v2Modules}
 \end{figure}
 
-La arquitectura sintetizada de este modelo se expone en la \autoref{fig:Inception-ResNet-v2}. Como puede observarse, a parte de las estructuras de entrada y de clasificación, cuyo funcionamiento es análogo al descrito en la \autoref{Chapter:ArchitectureInceptionV3}, esta red está formada principalmente por 5 módulos Inception distintos y denominados como Inception-ResNet-A, Reduction-A, Inception-ResNet-B, Reduction-B e Inception-ResNet-C. Estos tipos de bloques, representados en la \autoref{fig:Inception-ResNet-v2Modules}, tienen dos propósitos diferentes, encargándose esencialmente de la construcción de los mapas de características de los datos de entrada y de la reducción de estos espacios de activación con el fin de obtener unas representaciones homólogas de menor tamaño. De forma concreta y tras procesarse inicialmente las imágenes en la entrada, esta información es inyectada en los bloques Inception-ResNet-A de la \autoref{fig:Inception-ResNet-A}, que mediante el uso de filtros de dimensiones reducidas ($1\times 1$ y $3\times 3$) son capaces de detectar características muy básicas y disminuir el tamaño de las fotografías. Tras ello, estos datos son introducidos en el módulo Reducción-A expuesto en la \autoref{fig:Reduction-A}, que condensa aún más las dimensiones de las representaciones a fin de acelerar el entrenamiento de los posteriores bloques Inception-ResNet-B de la \autoref{fig:Inception-ResNet-B}. Estos últimos, de hecho, contienen un número menor de capas que sus predecesores Inception-ResNet-A, aunque utilizan filtros de mayor tamaño ($1\times 1$, $1\times 7$ y $7\times 1$) con el propósito de detectar características más complejas. Posteriormente, los resultados de estos últimos módulos son transferidos a la estructura Reduction-B que al contar con más capas que Reduction-A, como puede observarse en la \autoref{fig:Reduction-B}, es capaz de hacer frente a una mayor cantidad de datos que son la consecuencia directa del empleo de filtros de mayores dimensiones en los bloques Inception-ResNet-B. Toda esta información reducida es transferida seguidamente a los módulos Inception-ResNet-C, mostrados en la \autoref{fig:Inception-ResNet-C}, y que debido al aumento de la complejidad de la arquitectura emplean en esta ocasión un número reducido de filtros para aminorar el coste temporal del entrenamiento. Finalmente, la conexión secuencial de todos estos bloques da lugar a una red con una profundidad considerable, que tras extraer las características de las imágenes inyectadas en la entrada procederá a categorizarlas mediante el módulo clasificador adaptado al contexto del reconocimiento de expresiones faciales y con una arquitectura idéntica a la del modelo Inception-v3.
+La arquitectura sintetizada de este modelo se expone en la \autoref{fig:Inception-ResNet-v2}. Como puede observarse, a parte de las estructuras de entrada y de clasificación, cuyo funcionamiento es análogo al descrito en la \autoref{Chapter:ArchitectureInceptionV3}, esta red está formada principalmente por 5 módulos Inception distintos y denominados como Inception-ResNet-A, Reduction-A, Inception-ResNet-B, Reduction-B e Inception-ResNet-C. Estos tipos de bloques, representados en la \autoref{fig:Inception-ResNet-v2Modules}, tienen dos propósitos diferentes, encargándose esencialmente de la construcción de los mapas de características de los datos de entrada y de la reducción de estos espacios de activación con el fin de obtener unas representaciones homólogas de menor tamaño. 
+
+De forma concreta y tras procesarse inicialmente las imágenes en la entrada, esta información es inyectada en los bloques Inception-ResNet-A de la \autoref{fig:Inception-ResNet-A}, que mediante el uso de filtros de dimensiones reducidas ($1\times 1$ y $3\times 3$) son capaces de detectar características muy básicas y disminuir el tamaño de las fotografías. Tras ello, estos datos son introducidos en el módulo Reducción-A expuesto en la \autoref{fig:Reduction-A}, que condensa aún más las dimensiones de las representaciones a fin de acelerar el entrenamiento de los posteriores bloques Inception-ResNet-B de la \autoref{fig:Inception-ResNet-B}. Estos últimos, de hecho, contienen un número menor de capas que sus predecesores Inception-ResNet-A, aunque utilizan filtros de mayor tamaño ($1\times 1$, $1\times 7$ y $7\times 1$) con el propósito de detectar características más complejas. Posteriormente, los resultados de estos últimos módulos son transferidos a la estructura Reduction-B que al contar con más capas que Reduction-A, como puede observarse en la \autoref{fig:Reduction-B}, es capaz de hacer frente a una mayor cantidad de datos que son la consecuencia directa del empleo de filtros de mayores dimensiones en los bloques Inception-ResNet-B. Toda esta información reducida es transferida seguidamente a los módulos Inception-ResNet-C, mostrados en la \autoref{fig:Inception-ResNet-C}, y que debido al aumento de la complejidad de la arquitectura emplean en esta ocasión un número reducido de filtros para aminorar el coste temporal del entrenamiento. Finalmente, la conexión secuencial de todos estos bloques según la \autoref{fig:Inception-ResNet-v2} da lugar a una red con una profundidad considerable, que tras extraer las características de las imágenes inyectadas en la entrada procederá a categorizarlas mediante el módulo clasificador adaptado al contexto del reconocimiento de expresiones faciales y con una arquitectura idéntica a la del modelo Inception-v3.
 
 \subsection{ResNet-50}
 
@@ -110,7 +112,7 @@ La arquitectura ResNet se concibió por primera vez en 2015 \cite{ResNet} como u
     x &\equiv \text{entrada del bloque} \notag \\
     F(x) & \equiv \text{función residual aprendida por las dos capas convolucionales} \notag
 \end{align}
-La hipótesis de esta implementación expone que es más fácil optimizar los coeficientes de la asignación original que se encuentren cerca de la función de identidad forzando la función residual a cero, que realizar un mapeo de identidad mediante una sucesión de capas no lineales. Esta característica es precisamente la que se explota a lo largo de la profundidad de este tipo de redes permitiendo evitar y aliviar cualquier complejidad que vaya apareciendo durante el entrenamiento simplemente mediante la omisión de partes de la red.
+La hipótesis de esta implementación expone que es más fácil optimizar los coeficientes de la asignación original que se encuentren cerca de la función de identidad forzando la función residual a cero, que realizar un mapeo de identidad mediante una sucesión de capas no lineales \cite{ResNet}. Esta característica es precisamente la que se explota a lo largo de la profundidad de este tipo de redes permitiendo evitar y aliviar cualquier complejidad que vaya apareciendo durante el entrenamiento simplemente mediante la omisión de partes de la red.
 
 \begin{figure}
     \centering
@@ -119,13 +121,15 @@ La hipótesis de esta implementación expone que es más fácil optimizar los co
     \label{fig:ResNet-50}
 \end{figure}
 
-Hay numerosas variaciones de las arquitecturas ResNet, empleándose con una gran variedad de niveles de profundidad (34, 50, 101 e incluso 152 capas). Sin embargo, en el presente proyecto se usa principalmente la ResNet de 50 capas de la \autoref{fig:ResNet-50}, ya que es precisamente la utilizada por el Grupo de Geometría Visual de la universidad de Oxford en el entrenamiento de la base de datos VGGFace2 \cite{VGGFace2} y a partir de cuyos resultados se va a proceder a desarrollar la red particular enfocada al problema del reconocimiento de emociones. Como puede observarse, esta arquitectura adaptada no es más que una sucesión de bloques residuales con la novedad, con respecto a los modelos anteriormente descritos, de que, dada la naturaleza de la red, se ha empleado una capa auxiliar de aplanamiento que vincula las etapas de clasificación y de extracción de características. Asimismo y aunque no aparezcan por simplicidad en la \autoref{fig:ResNet-50}, cabe destacar que son empleadas la capa de activación ReLU y la capa de normalización por lotes en cada una de las etapas convolucionales, tal y como se describió más detalladamente en la \autoref{Chapter:Layers}.
+Hay numerosas variaciones de las arquitecturas ResNet, empleándose con una gran variedad de niveles de profundidad (34, 50, 101 e incluso 152 capas). Sin embargo, en el presente proyecto se usa principalmente la ResNet de 50 capas de la \autoref{fig:ResNet-50}, ya que es precisamente la utilizada por el Grupo de Geometría Visual de la universidad de Oxford en el entrenamiento de la base de datos VGGFace2 \cite{VGGFace2} y a partir de cuyos resultados se va a desarrollar la red particular enfocada al problema del reconocimiento de emociones. Como puede observarse, esta arquitectura adaptada no es más que una sucesión de bloques residuales con la novedad, con respecto a los modelos anteriormente descritos, de que, dada la naturaleza de la red, se ha empleado una capa auxiliar de aplanamiento que vincula la etapa de clasificación y la de extracción de características. Asimismo y aunque no aparezcan por simplicidad en la \autoref{fig:ResNet-50}, cabe destacar que son empleadas la capa de activación ReLU y la capa de normalización por lotes en cada una de las etapas convolucionales, tal y como se describió más detalladamente en la \autoref{Chapter:Layers}.
 
 \section{Entrenamiento}
 
+Por un lado, el método de aprendizaje descrito en este apartado trata de aprovechar lo máximo posible las capacidades de la base de datos FER-2013 mediante un preprocesamiento meticuloso y por otro, beneficiarse de los recursos computacionales ofrecidos por la plataforma de Google Cloud.
+
 \subsection{Preprocesamiento de los datos}
 
-En este proyecto, los objetivos principales del preprocesamiento del conjunto de entrenamiento de la base de datos FER-2013 son el aumento de la heterogeneidad o diversidad de estas imágenes y su adaptación a las características de los distintos modelos empleados, así como a las especificaciones impuestas por ciertas herramientas de la API de Keras. Por todo ello, son aplicadas las siguientes transformaciones a los datos antes de su procesamiento por las arquitecturas planteadas en los siguientes apartados:
+En este proyecto, los objetivos principales del preprocesamiento del conjunto de entrenamiento de la base de datos FER-2013 son el aumento de la heterogeneidad o diversidad de estas imágenes y su adaptación a las características de los distintos modelos empleados, así como a las especificaciones impuestas por ciertas herramientas de la API de Keras. Por todo ello, son aplicadas las siguientes transformaciones a los datos antes de su procesamiento por las arquitecturas planteadas en el apartado anterior:
 \begin{itemize}
   \item \textbf{Redimensionamiento}. En primer lugar es necesario modificar la resolución original de $48\times 48$ píxeles de las imágenes del conjunto de datos FER-2013 a las dimensiones aceptadas por los modelos Inception-v3, Inception-ResNet-v2 y ResNet-50 cargados en la librería de Keras. En los tres casos, y dadas las limitaciones de memorias observadas durante el entrenamiento (tratadas más detenidamente en las secciones correspondientes), la conversión se realiza a las proporciones mínimas aceptadas por estas arquitecturas:
         \begin{itemize}
@@ -136,31 +140,34 @@ En este proyecto, los objetivos principales del preprocesamiento del conjunto de
 
   Este proceso se realiza mediante el método considerado como estándar para este tipo de tareas de manipulación de imágenes y es conocido como interpolación bicúbica. A pesar de que su tiempo de procesamiento es más lento en comparación con las alternativas existentes (interpolación bilineal o interpolación por el vecino más cercano) es el que mejor resultados permite obtener en términos de calidad. Por ello y para evitar aumentar más el ruido de las imágenes empleadas, cuya calidad de por sí es bastante pobre, se ha optado por esta opción.
   
-  Por otro lado, las tres red originales presuponen en la entrada imágenes con un modelo de color RGB, por lo que también se hace necesario hacer una conversión de las representaciones de expresiones faciales en escala de grises a esta especificación. Esto es realizado simplemente mediante una reproducción de las imágenes originales a lo largo de las tres dimensiones correspondientes a los tres espacios de color de destino.
-  \item \textbf{Normalización}. Dado que tras el redimensionado las imágenes se componen de una serie de coeficientes RGB en el intervalo $[0, 255]$, es indispensable realizar una normalización con el fin de evitar el manejo de valores demasiado altos que generalmente dan lugar a una ralentización del proceso de aprendizaje. Concretamente, y con el objetivo de no eliminar en primera instancia los valores de los pesos iniciales, se han seguido los mismos procedimientos de regularización que en las redes originales preentrenadas:
+  Por otro lado, las tres redes originales presuponen en la entrada imágenes con un modelo de color RGB, por lo que también se hace necesario hacer una conversión de las representaciones de expresiones faciales en escala de grises a esta especificación. Esto es realizado simplemente mediante una reproducción de las imágenes originales a lo largo de las tres dimensiones correspondientes a los tres espacios de color de destino.
+  \item \textbf{Normalización}. Dado que tras el redimensionado las imágenes se componen de una serie de coeficientes RGB en el intervalo $[0, 255]$, es indispensable realizar una normalización con el fin de evitar el manejo de valores demasiado altos que generalmente dan lugar a una ralentización del proceso de aprendizaje. Concretamente, y con el objetivo de no eliminar en primera instancia los valores de los pesos iniciales, se han seguido los mismos procedimientos de regularización que los propuestos en las redes originales preentrenadas:
         \begin{itemize}
             \item \textbf{Inception-v3} y \textbf{Inception-ResNet-v2}. Los valores RGB del intervalo $[0, 255]$ son adaptados al espacio $[-1, 1]$ mediante la expresión matemática de la \autoref{eq:PreprocessInception}.
                 \begin{align} \label{eq:PreprocessInception}
                   \hat{x} &= \frac{x}{127.5} - 1 & \forall \text{\space} x \in [0, 255]
                 \end{align}
-            \item \textbf{ResNet-50}: Tanto en el documento original de este modelo \cite{ResNet} como en el artículo que hace uso de la base de datos VGGFace2 \cite{VGGFace2}, la normalización es llevada a cabo mediante la sustracción a cada uno de los píxeles del valor promedio del espacio de color al que corresponden. Mediante este proceso se consigue el centrado de los datos en cero. Sin embargo, dado que el conjunto FER-2013 adaptado según el punto anterior presenta los mismos coeficientes RGB en los 3 canales, se ha considerado conveniente realizar la sustracción del mismo promedio a cada una de las dimensiones según la \autoref{eq:PreprocessResNet}.
+            \item \textbf{ResNet-50}: Tanto en el documento original de este modelo \cite{ResNet} como en el artículo que hace uso de la base de datos VGGFace2 \cite{VGGFace2}, la normalización es llevada a cabo mediante la sustracción a cada uno de los píxeles del valor promedio del espacio de color al que corresponden. Mediante este proceso se consigue el centrado de los datos en cero. Sin embargo, dado que el conjunto FER-2013 redimensionado según el punto anterior presenta los mismos coeficientes RGB en los 3 canales, se ha considerado conveniente realizar la sustracción del mismo promedio a cada una de las dimensiones según la \autoref{eq:PreprocessResNet}.
                 \begin{align} \label{eq:PreprocessResNet}
                   \hat{x} &= x - \overline{x} = x - 128.8006 & \forall \text{\space} x \in [0, 255]
                 \end{align}
-            Asimismo, el valor de esta media se ha calculado tan sólo sobre el conjunto de entrenamiento, aplicándose posteriormente a los grupos de validación y evaluación. 
+            Asimismo, el valor de esta media se ha calculado tan sólo sobre los datos de entrenamiento del conjunto FER-2013, aplicándose posteriormente a los grupos de validación y evaluación. 
         \end{itemize}
         
-  \item \textbf{Transformaciones geométricas}. Tal y como se ha visto en la \autoref{Chapter:GeometricTransformations}, la aplicación de una serie de transformaciones geométricas a las imágenes del conjunto de entrenamiento puede enriquecer la base de datos empleada. En el caso particular de este proyecto se realizan las siguientes conversiones lineales de forma pseudoaleatoria en cada iteración del entrenamiento:
+  \item \textbf{Transformaciones geométricas}. Tal y como se ha visto en la \autoref{Chapter:GeometricTransformations}, la aplicación de una serie de transformaciones geométricas a las imágenes del conjunto de entrenamiento puede enriquecer la base de datos empleada. Por ello, en el caso particular de este proyecto se realizan las siguientes conversiones lineales de forma pseudoaleatoria en cada iteración del entrenamiento:
         \begin{itemize}
           \item \textbf{Rotación}. Es aplicada una rotación de sentido aleatorio de entre 0 y 10 grados sexagesimales a cada una de las imágenes. Para la elección de este valor se han tenido en cuenta el rango máximo de flexión lateral del cuello, que varía entre 20 y 45 grados \cite{LateralFlexion},y el hecho de que ciertas imágenes del conjunto de entrenamiento FER-2013 ya presentan rostros ligeramente girados.
           \item \textbf{Transformación de cizallamiento}. Esta transformación también es conocida como inclinación y es efectuada en las direcciones del eje de abscisas con una intensidad comprendida entre los 0 y los 10 grados sexagesimales.
           \item \textbf{Volteo}. Se fuerza a un volteo horizontal aleatorio de las imágenes inyectadas. 
           \item \textbf{\textit{Zoom}}. A pesar de que los datos de entrenamiento ya se componen de imágenes con rostros centrados y enfocados, se ha recurrido a una ampliación o reducción de carácter aleatorio de las representaciones del 10\% con el objetivo de lograr una mayor generalización.
-          \item \textbf{Relleno}. Dado que algunas de las transformaciones anteriormente nombradas implican la introducción de puntos externos a las imágenes en los campos receptivos originales, se hace necesaria la aplicación de un método para evitar la inclusión de este ruido. En este contexto se han explorado distintos procedimientos de relleno, como la propagación constante de píxeles o el método de los vecinos más próximos. Sin embargo, los mejores resultados observados experimentalmente se han obtenido mediante la técnica de reflexión de las imágenes transformadas.
+          \item \textbf{Relleno}. Dado que algunas de las transformaciones anteriormente nombradas implican la introducción de puntos externos a las imágenes en los campos receptivos originales, se hace necesaria la aplicación de un método que evite la inclusión de este ruido. En este contexto se han explorado distintos procedimientos de relleno, como la propagación constante de píxeles o el método de los vecinos más próximos. Sin embargo, los mejores resultados observados experimentalmente se han obtenido mediante la técnica de reflexión de las imágenes transformadas.
         \end{itemize}
 \end{itemize}
 
-\subsection{Despliegue de los modelos en la plataforma Google Cloud}
+\subsection{Despliegue en la plataforma Google Cloud}
+
+
+
 
 % upper layers training
     % optimizer   = Adam(lr = 1e-3, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1e-08, decay = 0.0)
@@ -217,6 +224,21 @@ En este proyecto, los objetivos principales del preprocesamiento del conjunto de
 
 \section{Resultados}
 
+\begin{table}
+\centering
+\label{my-label}
+\begin{tabular}{c|c|c|c|c|}
+\cline{2-5}
+ & \textbf{Precisión} & \textbf{Tamaño} & \textbf{Parámetros} & \textbf{Profundidad} \\ \hline
+\multicolumn{1}{|c|}{\textbf{Inception-v3}} & aa & 92 MB & 23\,851\,784 & 159 \\ \hline
+\multicolumn{1}{|c|}{\textbf{Inception-ResNet-v2}} & bb & 215 MB & 55\,873\,736 & 572 \\ \hline
+\multicolumn{1}{|c|}{\textbf{ResNet-50}} & cc & 99 MB & 25\,636\,712 & 168 \\ \hline
+\end{tabular}
+\caption{My caption} \label{Table:Models}
+\end{table}
+
+
+
 \subsection{Inception-v3}
 
 \cite{Inception-v3}
@@ -230,5 +252,6 @@ En este proyecto, los objetivos principales del preprocesamiento del conjunto de
 \subsection{ResNet-50}
 
 \cite{ResNet}
+
 
 

@@ -185,8 +185,8 @@ Al contrario que el método del descenso estocástico del gradiente, que permite
 
 De esta forma, Adam, además de almacenar un promedio del primer momento (la media), como en RMSProp, también utiliza el promedio de los segundos momentos de los gradientes (la varianza) para la actualización de los parámetros, proceso que se rige por la \autoref{eq:Adam}.
 \begin{align}
-    m_t &= \beta_1 \cdot m_{t-1} + (1 - \beta_1) \cdot \nabla f(\omega_{t-1}) \\
-    v_t &= \beta_2 \cdot v_{t-1} + (1 - \beta_2) \cdot \nabla^2 f(\omega_{t-1}) \\
+    m_t &= \beta_1 \cdot m_{t-1} + (1 - \beta_1) \cdot \nabla f(\omega_{t-1}) \label{eq:AdamBeta1}\\
+    v_t &= \beta_2 \cdot v_{t-1} + (1 - \beta_2) \cdot \nabla^2 f(\omega_{t-1}) \label{eq:AdamBeta2}\\
     \hat{m}_t &= m_t / (1 - \beta_1^t) \\
     \hat{v}_t &= v_t / (1 - \beta_2^t) \\
     \omega_t &= \omega_{t-1} - \lambda \cdot \hat{m}_t / (\sqrt{\hat{v}_t} + \epsilon) \label{eq:Adam} \\

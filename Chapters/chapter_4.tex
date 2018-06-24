@@ -2,7 +2,7 @@
 
 A continuación se van a desarrollar los conceptos y técnicas empleadas para la implementación de los sistemas de reconocimiento de expresiones faciales desarrollados en la \autoref{Chapter:5}, así como sus interacciones con los entornos descritos en el \autoref{Chapter:3}.
 
-\section{Capas Empleadas en las Arquitecturas Neuronales Convolucionales Propuestas} \label{Chapter:Layers}
+\section{Capas Empleadas en las Arquitecturas Propuestas} \label{Chapter:Layers}
 
 La forma más común de una arquitectura convolucional consiste en el apilamiento de algunas capas convolucionales y capas ReLU seguidas por capas de agrupación, repitiéndose este patrón hasta que la imagen de entrada disminuya espacialmente a un tamaño más reducido. En algunos puntos es común hacer transiciones a capas totalmente conectadas, de \textit{dropout} o capas de normalización. Sin embargo, en la práctica y en el 90\% de las aplicaciones el tipo de estructura es prácticamente intrascendente ya que las CNN son diseñadas o entrenadas desde cero tan sólo en ocasiones excepcionales \cite{CS231n}.
 
@@ -188,7 +188,7 @@ Es un método recientemente introducido \cite{cycleGAN} para la generación de i
 
 En la \autoref{fig:cycleGAN} se puede observar la estructura simplificada de esta red, mientras que la expresión por la que se rige el aprendizaje es la de la \autoref{eq:CycleGAN}.
 \begin{align}
-    \underset{G,F}{min} \ \underset{D_X, D_Y}{max} \ \mathcal{V}(G, F, D_X, D_Y) &= \mathcal{L}_{GAN}(G, F, D_X, Y, X) + \mathcal{L}_{GAN}(G, F, D_Y, X, Y) \notag \\ &\quad + \lambda \cdot \mathcal{L}_{cycleGAN}(G, F) \label{eq:CycleGAN} \\
+    \underset{G,F}{min} \ \underset{D_X, D_Y}{max} \ \mathcal{V}(G, F, D_X, D_Y) &= \mathcal{L}_{GAN}(D_X, F) + \mathcal{L}_{GAN}(D_Y, G) \notag \\ &\quad + \lambda \cdot \mathcal{L}_{cycleGAN}(G, F) \label{eq:CycleGAN} \\
     \text{donde}~
     \mathcal{L}_{GAN} &\equiv \text{\autoref{eq:GAN}} \notag \\
     \mathcal{L}_{cycleGAN}(G, F) &= \mathbb{E}_{x\sim p_{datos}(x)} \big[\norm{F(G(x)) - x}\big] + \notag \\ &\quad \mathbb{E}_{y\sim p_{datos}(y)} \big[\norm{G(F(y)) - y}\big] \label{eq:CycleGANLoss}\\

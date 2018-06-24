@@ -159,7 +159,7 @@ En este contexto, Keras facilita una serie de clases que permiten, entre otras t
 
 A pesar de todo ello, estos métodos no son suficientes para eliminar la alta correlación existente entre las distintas muestras \cite{ZCA}, lo que convierte a estas transformaciones en una solución incompleta, aunque parcialmente efectiva, al problema que supone el uso de un número de imágenes limitado.
 
-\subsection{Redes Generativas Antagónicas}
+\subsection{Redes Generativas Antagónicas} \label{Chapter:GAN}
 
 Las redes generativas antagónicas son una clase de algoritmos de inteligencia artificial desarrolladas por Ian Goodfellow en 2014 y utilizadas en el aprendizaje automático no supervisado \cite{GAN}. Están formadas por un sistema de dos redes neuronales que compiten entre ellas y cuyo funcionamiento es análogo al algoritmo recursivo o método de decisión \textit{minimax} restringido para dos individuos, el cual consiste en elegir el mejor movimiento para ti mismo suponiendo que tu contrincante escogerá el peor para ti. 
 
@@ -176,7 +176,7 @@ En la \autoref{fig:GAN} se muestra la estructura de este tipo de redes caracteri
 \end{align}
 En definitiva, esta técnica permite generar imágenes que parecen, al menos superficialmente, auténticas para los observadores humanos a partir de otras que están parcialmente relacionadas con el resultado que se quiere obtener.
 
-\subsubsection{Redes Generativas Antagónicas de Ciclo Consecuente}
+\subsubsection{Redes Generativas Antagónicas de Ciclo Consecuente} \label{Chapter:CycleGan}
 
 Es un método recientemente introducido \cite{cycleGAN} para la generación de imágenes que es particularmente útil al permitir utilizar datos de entrenamiento no emparejados, es decir, para entrenar este tipo de arquitecturas no es necesario establecer correspondencias directas entre las imágenes de los dominios inicial y final. Su funcionamiento está basado en las redes GAN convencionales a las que se le añade una función adicional que monitoriza las pérdidas de ciclo consecuente, hecho que permite al modelo aprender tanto las correspondencias directas como las inversas.
 \begin{figure}

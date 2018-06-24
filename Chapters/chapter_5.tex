@@ -9,31 +9,31 @@ Tal y como se ha comentado en la \autoref{Chapter:TransferLearning}, la explotac
     \label{fig:Models}
 \end{figure}
 
-Por consiguiente, son utilizados en primera instancia los modelos Inception-v3 \cite{Inception-v3} e Inception-ResNet-v2 \cite{Inception-ResNet} con los pesos entrenados previamente sobre el conjunto de datos ImageNet descrito en la \autoref{Chapter:ImageNet}. Sin embargo, dado que las propiedades de las imágenes de esta base de datos difieren en gran medida de las características faciales que se intentan aprender y reconocer, se ha optado por explorar el uso de modelos menos eficaces pero enfocados al reconocimiento facial. Es por ello que en última instancia se emplea la arquitectura ResNet-50 preetrenada con la base de datos VGGFace2 expuesta en la \autoref{Chapter:VGGFace2}. La comparación de estos modelos en el desempeño del desafío ILSVRC puede observarse en la \autoref{fig:Models}. Esta representación, además, escenifica la principal razón por la cual se han elegido estos sistemas concretos: son los que mejores tasas obtienen con respecto al coste computacional y al número de parámetros.
+Por consiguiente, son utilizados en primera instancia los modelos Inception-v3 \cite{Inception-v3} e Inception-ResNet-v2 \cite{Inception-ResNet} con los pesos entrenados previamente sobre el conjunto de datos ImageNet descrito en la \autoref{Chapter:ImageNet}. Sin embargo, dado que las propiedades de las imágenes de esta base de datos difieren en gran medida de las características faciales que se intentan aprender y reconocer, se ha optado por explorar el uso de modelos menos eficaces pero enfocados al reconocimiento facial. Es por ello que en última instancia se emplea la arquitectura ResNet-50 \cite{ResNet} preetrenada con la base de datos VGGFace2 expuesta en la \autoref{Chapter:VGGFace2}. La comparación de estos modelos en el desempeño del desafío ILSVRC puede observarse en la \autoref{fig:Models}. Esta representación, además, escenifica la principal razón por la cual se han elegido estos sistemas concretos: son los que mejores tasas obtienen con respecto al coste computacional y al número de parámetros.
 
 En definitiva, a lo largo del proceso de desarrollo de un sistema de reconocimiento de expresiones faciales válido, se han ido explorando numerosas arquitecturas (Inception-v3, Inception-ResNet-v2 y ResNet-50) y técnicas (aumento de datos) con el objetivo de ir obteniendo cada vez mejores resultados sobre la base de datos FER-2013. Asimismo, a fin de permitir una comparación justa con respecto a los resultados de la \autoref{Chapter:RelatedWork}, son utilizados los protocolos de uso estipulados inicialmente por este desafío y que establecen la división de esta base de datos en tres conjuntos diferentes: entrenamiento, validación y evaluación.
 
 \section{Arquitecturas afinadas}
 
-Inception-v3 ha sido el resultado de las investigaciones llevadas a cabo por el equipo de Google para conseguir un modelo con una arquitectura cada vez más profunda e inteligente y capaz de desenvolverse de forma eficiente, tanto computacionalmente como cualitativamente, en el desafío ILSVR.
+\subsection{Inception-v3} \label{Chapter:ArchitectureInceptionV3}
 
-\subsection{Inception-v3}
+Inception-v3 es el resultado de las investigaciones llevadas a cabo por el equipo de Google para conseguir un modelo con una arquitectura cada vez más profunda e inteligente y capaz de desenvolverse de forma eficiente, tanto computacionalmente como cualitativamente, en el desafío ILSVR.
 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{Images/Inception-v3.png}
-    \caption{Arquitectura del modelo Inception-v3 adaptado al problema del reconocimiento de expresiones faciales \cite{img:Inception-v3}.}
+    \caption{Arquitectura del modelo Inception-v3 adaptada al problema del reconocimiento de expresiones faciales \cite{img:Inception-v3}.}
     \label{fig:Inception-v3}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{Images/InceptionModules.png}
-    \caption{Módulos Inception empleados en la arquitectura Inception-v3. Estas estructuras son utilizadas para promover las representaciones de alta dimensión (izquierda) y la factorización de las convoluciones de dimensión $n\times n$ (derecha) \cite{Inception-v3}. En el caso particular de Inception-v3, $n=7$.}
+    \caption{Módulos Inception empleados en la arquitectura Inception-v3. Estos bloques son utilizados para promover las representaciones de alta dimensión (izquierda) y la factorización de las convoluciones de dimensión $n\times n$ (derecha) \cite{Inception-v3}.}
     \label{fig:InceptionModules}
 \end{figure}
 
-En la \autoref{fig:Inception-v3} se muestra la estructura simplificada y adaptada al problema del reconocimiento de expresiones faciales del modelo Inception-v3. Esta arquitectura propuesta es básicamente una sucesión de tramos convolucionales y no linealidades, empleándose la función de activación ReLU y la normalización por lotes en cada una de las etapas, aunque esto último no se muestre explícitamente en la representación anteriormente mencionada. Como se ha podido advertir, la característica principal de este modelo es el hecho de que el flujo de datos a lo largo de algunas secciones de esta red no es secuencial, sino que se realiza en paralelo. Estas agrupaciones son conocidas como módulos Inception y representan la solución a los problemas de eficiencia de las redes estado del arte predecesoras, cumpliendo, además, la misma función y obteniendo los mismos resultados que una capa convolucional estándar. Las diferentes estructuras de estos módulos empleados por el modelo Inception-v3 pueden observarse en la \autoref{fig:InceptionModules}. La idea detrás de estas disposiciones paralelas es que dada la misma entrada para varias capas convolucionales o de agrupación de distinto tamaño se generen características únicas para cada una de ellas que posteriormente procederán a concatenarse. Este enfoque, sin embargo, da lugar a una salida con una profundidad extremadamente grande que es solucionada mediante la utilización de filtros convolucionales $1\times 1$, especialmente efectivos para reducir la dimensionalidad \cite{NetworkInNetwork} e incorporados justo antes de las capas convolucionales de mayor tamaño. Otro de los puntos que es explotado por los módulos Inception es la sustitución de los filtros tradicionales de tamaño $n\times n$ por una secuencia de capas convolucionales de dimensiones $1\times n$ y $n \times 1$. Mediante esta técnica se consigue disminuir drásticamente los costes computacionales a medida que $n$ aumenta. En la práctica y tal como se ha visto en la \autoref{fig:InceptionModules}, son utilizados básicamente filtros con $n = 7$ y $n = 3$.
+En la \autoref{fig:Inception-v3} se muestra la estructura simplificada y adaptada al problema del reconocimiento de expresiones faciales del modelo Inception-v3. Esta arquitectura propuesta es básicamente una sucesión de tramos convolucionales y no linealidades, empleándose la función de activación ReLU y la normalización por lotes en cada una de las etapas según lo descrito en \autoref{Chapter:Layers}, aunque esto último no se muestre explícitamente en la representación anteriormente mencionada. Como se ha podido advertir, la característica principal de este modelo es el hecho de que el flujo de datos a lo largo de algunas secciones de esta red no es secuencial, sino que se realiza en paralelo. Estas agrupaciones son conocidas como módulos Inception y representan la solución a los problemas de eficiencia de las redes estado del arte predecesoras, cumpliendo, además, la misma función y obteniendo los mismos resultados que una capa convolucional estándar. Las diferentes estructuras de estos módulos empleados por el modelo Inception-v3 pueden observarse en la \autoref{fig:InceptionModules}. La idea detrás de estas disposiciones paralelas es que dada la misma entrada para varias capas convolucionales o de agrupación de distinto tamaño se generen características únicas para cada una de ellas que posteriormente procederán a concatenarse. Este enfoque, sin embargo, da lugar a una salida con una profundidad extremadamente grande que es solucionada mediante la utilización de filtros convolucionales $1\times 1$, especialmente efectivos para reducir la dimensionalidad \cite{NetworkInNetwork} e incorporados justo antes de las capas convolucionales de mayor tamaño. Otro de los puntos que es explotado por los módulos Inception es la sustitución de los filtros tradicionales de tamaño $n\times n$ por una secuencia de capas convolucionales de dimensiones $1\times n$ y $n \times 1$. Mediante esta técnica se consigue disminuir drásticamente los costes computacionales a medida que $n$ aumenta. En la práctica y tal como se ha visto en la \autoref{fig:InceptionModules}, son utilizados básicamente filtros con $n = 7$ y $n = 3$.
 
 Por otro lado, dado que esta red ha sido diseñada para competir en el reto ImageNet, es necesario modificar la etapa de clasificación del modelo Inception-v3 original, tal y como se ha indicado en la \autoref{fig:Inception-v3}. De esta forma, en primer lugar se ha procedido a introducir una capa basada en la agrupación promedio global, que impone la correspondencia entre los mapas de activación y las clases, reduce el número de parámetros y además es menos propensa al sobreaprendizaje que las capas convencionales totalmente conectadas \cite{NetworkInNetwork}. Posteriormente y con la finalidad de reducir la dimensionalidad de la red de una manera suave a las 7 clases correspondientes a las expresiones faciales que se pretenden clasificar, son insertadas dos capas totalmente conectadas de 2\,048 y 1\,024 neuronas respectivamente.
 
@@ -41,13 +41,85 @@ En cuanto a la entrada y puesto que las imágenes del conjunto de datos FER-2013
 
 \subsection{Inception-ResNet-v2}
 
+Inception-ResNet-v2 es una ampliación, llevada a cabo por el grupo de inteligencia artificial de Google, de los conceptos planteados en la arquitectura Inception-v3 mediante dos metodologías que tienen como fin aumentar el rendimiento y el número de módulos Inception. La primera consiste simplemente en el empleo de una estructura ligeramente distinta dentro de los propios bloques en función de la posición de éstos en la red, mientras que la segunda, por su parte, plantea la utilización de conexiones residuales, similares a las desarrolladas por el equipo de Microsoft en las redes ResNet \cite{ResNet}, para acelerar el proceso de entrenamiento. Estas conexiones, además, favorecen la simplificación de los bloques Inception. En definitiva, estas dos ideas permiten alcanzar e incluso superar el rendimiento de los modelos puros de Inception con un número significativamente menor de iteraciones de entrenamiento.
 
-\cite{Inception-ResNet}
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{Images/Inception-ResNet-v2.png}
+    \caption{Arquitectura comprimida y adaptada al problema del reconocimiento de expresiones del modelo Inception-ResNet-v2 \cite{img:Inception-ResNet-v2}.}
+    \label{fig:Inception-ResNet-v2}
+\end{figure}
 
+\begin{figure}
+    \centering
+    \begin{subfigure}[t]{.45\textwidth}
+      \centering
+      \includegraphics[width=.8\linewidth]{Images/Inception-ResNet-A.png}
+      \caption{Bloque Inception-ResNet-A.}
+      \label{fig:Inception-ResNet-A}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{.45\textwidth}
+      \centering
+      \includegraphics[width=.8\linewidth]{Images/Inception-ResNet-B.png}
+      \caption{Bloque Inception-ResNet-B.}
+      \label{fig:Inception-ResNet-B}
+    \end{subfigure}
+    
+    \vspace{1cm}
+    \begin{subfigure}[t]{.45\textwidth}
+      \centering
+      \includegraphics[width=.7\linewidth]{Images/Inception-ResNet-C.png}
+      \caption{Bloque Inception-ResNet-C.}
+      \label{fig:Inception-ResNet-C}
+    \end{subfigure}
+    
+    \vspace{1cm}
+    \begin{subfigure}[t]{.45\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{Images/Reduction-A.png}
+      \caption{Bloque Reduction-A.}
+      \label{fig:Reduction-A}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{.45\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{Images/Reduction-B.png}
+      \caption{Bloque Reduction-B.}
+      \label{fig:Reduction-B}
+    \end{subfigure}
+    \caption{Módulos empleados en la arquitectura Inception-ResNet-v2 \cite{Inception-ResNet}.}
+    \label{fig:Inception-ResNet-v2Modules}
+\end{figure}
+
+La arquitectura sintetizada de este modelo se expone en la \autoref{fig:Inception-ResNet-v2}. Como puede observarse, a parte de las estructuras de entrada y de clasificación, cuyo funcionamiento es análogo al descrito en la \autoref{Chapter:ArchitectureInceptionV3}, esta red está formada principalmente por 5 módulos Inception distintos y denominados como Inception-ResNet-A, Reduction-A, Inception-ResNet-B, Reduction-B e Inception-ResNet-C. Estos tipos de bloques, representados en la \autoref{fig:Inception-ResNet-v2Modules}, tienen dos propósitos diferentes, encargándose esencialmente de la construcción de los mapas de características de los datos de entrada y de la reducción de estos espacios de activación con el fin de obtener unas representaciones homólogas de menor tamaño. De forma concreta y tras procesarse inicialmente las imágenes en la entrada, esta información es inyectada en los bloques Inception-ResNet-A de la \autoref{fig:Inception-ResNet-A}, que mediante el uso de filtros de dimensiones reducidas ($1\times 1$ y $3\times 3$) son capaces de detectar características muy básicas y disminuir el tamaño de las fotografías. Tras ello, estos datos son introducidos en el módulo Reducción-A expuesto en la \autoref{fig:Reduction-A}, que condensa aún más las dimensiones de las representaciones a fin de acelerar el entrenamiento de los posteriores bloques Inception-ResNet-B de la \autoref{fig:Inception-ResNet-B}. Estos últimos, de hecho, contienen un número menor de capas que sus predecesores Inception-ResNet-A, aunque utilizan filtros de mayor tamaño ($1\times 1$, $1\times 7$ y $7\times 1$) con el propósito de detectar características más complejas. Posteriormente, los resultados de estos últimos módulos son transferidos a la estructura Reduction-B que al contar con más capas que Reduction-A, como puede observarse en la \autoref{fig:Reduction-B}, es capaz de hacer frente a una mayor cantidad de datos que son la consecuencia directa del empleo de filtros de mayores dimensiones en los bloques Inception-ResNet-B. Toda esta información reducida es transferida seguidamente a los módulos Inception-ResNet-C, mostrados en la \autoref{fig:Inception-ResNet-C}, y que debido al aumento de la complejidad de la arquitectura emplean en esta ocasión un número reducido de filtros para aminorar el coste temporal del entrenamiento. Finalmente, la conexión secuencial de todos estos bloques da lugar a una red con una profundidad considerable, que tras extraer las características de las imágenes inyectadas en la entrada procederá a categorizarlas mediante el módulo clasificador adaptado al contexto del reconocimiento de expresiones faciales y con una arquitectura idéntica a la del modelo Inception-v3.
 
 \subsection{ResNet-50}
 
-\cite{ResNet}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.2]{Images/ResnetBlock.png}
+    \caption{Bloque residual básico \cite{ResNet}.}
+    \label{fig:ResNetBlock}
+\end{figure}
+
+La arquitectura ResNet se concibió por primera vez en 2015 \cite{ResNet} como un intento de crear un modelo de clasificación de imágenes que solucionara los problemas de las redes convencionales cuya respuesta, al contrario de lo que se podía intuir, se degradaba significativamente al aumentarse la profundidad. De esta forma, esta investigación demostró que la agregación de ciertas conexiones adicionales que pasaban por alto determinadas capas a las redes tradicionales permitía seguir aumentando el número de niveles sin que el rendimiento decayera. La unidad básica que aprovecha esta idea y de la que se componen este tipo de redes se expone en la \autoref{fig:ResNetBlock}. Como se puede advertir, estos módulos constan básicamente de dos capas convolucionales apiladas y una conexión que agrega los datos de la entrada directamente a la salida, tal y como se muestra en la \autoref{eq:ResNet}.
+\begin{align} \label{eq:ResNet}
+    H(x) &= F(x) + x \\
+    \text{donde}~ 
+    x &\equiv \text{entrada del bloque} \notag \\
+    F(x) & \equiv \text{función residual aprendida por las dos capas convolucionales} \notag
+\end{align}
+La hipótesis de esta implementación expone que es más fácil optimizar los coeficientes de la asignación original que se encuentren cerca de la función de identidad forzando la función residual a cero, que realizar un mapeo de identidad mediante una sucesión de capas no lineales. Esta característica es precisamente la que se explota a lo largo de la profundidad de este tipo de redes permitiendo evitar y aliviar cualquier complejidad que vaya apareciendo durante el entrenamiento simplemente mediante la omisión de partes de la red.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{Images/ResNet-50.png}
+    \caption{Arquitectura del modelo ResNet-50 adaptado al problema del reconocimiento de expresiones faciales \cite{img:ResNet-50}.}
+    \label{fig:ResNet-50}
+\end{figure}
+
+Hay numerosas variaciones de las arquitecturas ResNet, empleándose con una gran variedad de niveles de profundidad (34, 50, 101 e incluso 152 capas). Sin embargo, en el presente proyecto se usa principalmente la ResNet de 50 capas de la \autoref{fig:ResNet-50}, ya que es precisamente la utilizada por el Grupo de Geometría Visual de la universidad de Oxford en el entrenamiento de la base de datos VGGFace2 \cite{VGGFace2} y a partir de cuyos resultados se va a proceder a desarrollar la red particular enfocada al problema del reconocimiento de emociones. Como puede observarse, esta arquitectura adaptada no es más que una sucesión de bloques residuales con la novedad, con respecto a los modelos anteriormente descritos, de que, dada la naturaleza de la red, se ha empleado una capa auxiliar de aplanamiento que vincula las etapas de clasificación y de extracción de características. Asimismo y aunque no aparezcan por simplicidad en la \autoref{fig:ResNet-50}, cabe destacar que son empleadas la capa de activación ReLU y la capa de normalización por lotes en cada una de las etapas convolucionales, tal y como se describió más detalladamente en la \autoref{Chapter:Layers}.
 
 \section{Entrenamiento}
 
@@ -125,6 +197,22 @@ En este proyecto, los objetivos principales del preprocesamiento del conjunto de
 
 
 \subsubsection{ResNet-50}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \section{Resultados}

@@ -167,40 +167,15 @@ En este proyecto, los objetivos principales del preprocesamiento del conjunto de
 \subsection{Despliegue en la plataforma Google Cloud}
 
 
+\subsubsection{Inception-v3}
 
 
-% upper layers training
-    % optimizer   = Adam(lr = 1e-3, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1e-08, decay = 0.0)
-    % loss        = 'categorical_crossentropy'
-    
-    
-% all layers training    
-    % epochs_all_layers   = 100
-    % optimizer   = SGD(lr = 1e-3, momentum = 0.9, decay = 0.0, nesterov = True)
-    % loss        = 'categorical_crossentropy' 
-    
-    % if (epoch % 3) == 0 and current_lr > 1e-4 and epoch != 0:
-    % K.set_value(model.optimizer.lr, current_lr * 0.5)
-    
-    % reduce_lr_2 = ReduceLROnPlateau(
-	% monitor 	= 'val_loss',
-	% factor		= 0.5,
-	% patience	= 3,
-	% mode 		= 'auto',
-	% min_lr		= 1e-6)
-	
-	%early_stop = EarlyStopping(
-	%monitor 	= 'val_loss',
-	%patience 	= 10,
-	%mode 		= 'auto')
-
-% batch_size          = 128
-% tensorboard 
-% ModelCheckpoint
-% Save model.h5 on to google storage
 
 
-\subsubsection{Inception-v3 e Inception-ResNet-v2}
+
+\subsubsection{Inception-ResNet-v2}
+
+
 
 
 \subsubsection{ResNet-50}

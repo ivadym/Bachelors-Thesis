@@ -72,15 +72,13 @@ Teniendo en cuenta la diversidad de las imágenes del conjunto FER-2013, en esta
 
 El proceso de entrenamiento de esta arquitectura ha seguido los puntos descritos en la \autoref{Chapter:CycleGan} y ha tenido como objetivo la reducción de las funciones de pérdidas descritas en la \autoref{eq:CycleGAN} y mostradas gráficamente en la \autoref{fig:CycleGAN_general}. Asimismo, cabe destacar que los parámetros de este modelo han sido escogidos con respecto al artículo original que describe este tipo de redes generativas \cite{cycleGAN}:
 \begin{itemize}
-    \item \textbf{Inicialización}. En primer lugar y dado que esta red ha sido entrenada desde cero se ha visto necesario realizar una inicialización de los pesos a partir de una distribución gaussiana con una media de 0 y una desviación estándar de 0,02. 
+    \item \textbf{Inicialización}. En primer lugar y dado que esta red ha sido entrenada desde cero se ha visto necesario realizar una inicialización de los pesos a partir de una distribución gaussiana con una media de $0$ y una desviación estándar de $0.02$. 
     \item \textbf{Tamaño de los lotes}. Las imágenes se han alimentado en la red de una en una, lo que ha implicado también actualizar las funciones de pérdidas y los pesos en cada pasada.
     \item \textbf{Optimizador}. Se ha empleado el optimizador Adam con una tasa de aprendizaje de $ \lambda = 0.0002$ (\autoref{eq:Adam}), $\beta_1 = 0.5$ (\autoref{eq:AdamBeta1}) y $\beta_2 = 0.999$ (\autoref{eq:AdamBeta2}).
     \item \textbf{Peso de la función de pérdidas de ciclo consecuente}. Se le ha otrogado un valor de $\lambda = 10$ (\autoref{eq:CycleGAN}).
-    \item \textbf{Iteraciones}. La red ha sido entrenada durante $7200...200$ iteraciones sobre los datos categorizados con las expresiones faciales de asco y neutral.
+    \item \textbf{Iteraciones}. La red ha sido entrenada durante $7\,300$ iteraciones sobre los datos categorizados con las expresiones faciales de asco y neutral.
 \end{itemize}
 
 En esta ocasión el entrenamiento en la plataforma de Google Cloud se ha realizado mediante la herramienta Cloud Machine Learning Engine descrita en la \autoref{Chapter:GoogleCloud} y empleando la GPU NVIDIA Tesla K80. Esto es debido a que ya no se presentan las limitaciones de memoria anteriormente existentes al utilizarse esta vez un número bastante inferior de imágenes que reúnen solo las emociones de la clases neutral y asco.
-
-Por último y de igual manera que ocurría con el despliegue de los modelos Inception y ResNet, se ha tenido que adaptar el código local a esta nueva herramienta empleada, siendo necesario volver a implementar de forma manual algunas de las funcionalidades provistas inicialmente por Keras, como la normalización por lotes o la función de activación ReLU.
 
 \section{Resultados}

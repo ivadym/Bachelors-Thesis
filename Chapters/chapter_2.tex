@@ -145,7 +145,7 @@ El pseudocódigo completo de este proceso se explica detalladamente en el \autor
 
 Actualmente, los dos métodos más empleados y recomendados para realizar la actualización de parámetros, con el objetivo de encontrar una serie de pesos $\omega_{i,j}$ que minimicen la función de pérdidas, son el Descenso Estocástico del Gradiente (SGD) con Nesterov Momentum y la Estimación del Momento Adaptativo (Adam) \cite{CS231n}.
 
-\subsubsection{Descenso Estocástico del Gradiente con Nesterov Momentum}
+\subsubsection{Descenso Estocástico del Gradiente con Nesterov Momentum} \label{Chapter:SGD}
 
 La forma más simple y común de llevar a cabo la optimización es, precisamente, mediante SGD, que permite modificar los parámetros en la dirección negativa del gradiente (\autoref{eq:SGD}), al apuntar éste en la dirección del máximo en cada uno de los puntos evaluados, con el fin de minimizar la función de pérdidas.
 \begin{align} \label{eq:SGD}
@@ -171,11 +171,11 @@ Los métodos Momentum, por su parte, presentan un enfoque que ofrece mejores tas
 
 Nesterov Momentum, a su vez, también goza de mayores garantías teóricas de convergencia, funcionando ligeramente mejor en la práctica que el método Momentum estándar \cite{Sutskever}. En la \autoref{fig:NesterovMomentum} se puede observar la comparación, haciéndose evidente el aumento de la eficacia de este último procedimiento representado mediante la \autoref{eq:SGDNesterovMomentum}, que da primero los saltos en la dirección del gradiente acumulado anterior para posteriormente calcular el gradiente en la posición actualizada y realizar una corrección.
 \begin{align} 
-    v_t &= \mu \cdot v_{t-1} - \lambda \cdot \nabla f(\overbrace{\omega_{t-1} + \mu \cdot v_{t-1}}^{w_{salto}}) \\
+    v_t &= \mu \cdot v_{t-1} - \lambda \cdot \nabla f(\overbrace{\omega_{t-1} + \mu \cdot v_{t-1}}^{w_{salto}}) \label{eq:SGDNM_1} \\
     \overbrace{\omega_t}^{w_{corregido}} &= \omega_{t-1} + v_t \label{eq:SGDNesterovMomentum}
 \end{align}
 
-\subsubsection{Estimación del Momento Adaptativo}
+\subsubsection{Estimación del Momento Adaptativo} \label{Chapter:Adam}
 
 Al contrario que el método del descenso estocástico del gradiente, que permite manipular la tasa de aprendizaje de forma global e idéntica para toda la red, Adam adapta la tasa de aprendizaje a cada uno de los parámetros presentes en el modelo. En el artículo que describe este algoritmo, los autores exponen a Adam como la combinación de dos de las extensiones de SGD \cite{Adam}:
 \begin{itemize}

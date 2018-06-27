@@ -1,5 +1,49 @@
 \chapter{Figuras} \label{Appendix:Figures}
 
+%% INCEPTION-RESNET-V2 MODULES
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[t]{.45\textwidth}
+      \centering
+      \includegraphics[width=.8\linewidth]{Images/Inception-ResNet-A.png}
+      \caption{Bloque Inception-ResNet-A.}
+      \label{fig:Inception-ResNet-A}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{.45\textwidth}
+      \centering
+      \includegraphics[width=.8\linewidth]{Images/Inception-ResNet-B.png}
+      \caption{Bloque Inception-ResNet-B.}
+      \label{fig:Inception-ResNet-B}
+    \end{subfigure}
+    
+    \vspace{1cm}
+    \begin{subfigure}[t]{.45\textwidth}
+      \centering
+      \includegraphics[width=.7\linewidth]{Images/Inception-ResNet-C.png}
+      \caption{Bloque Inception-ResNet-C.}
+      \label{fig:Inception-ResNet-C}
+    \end{subfigure}
+    
+    \vspace{1cm}
+    \begin{subfigure}[t]{.45\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{Images/Reduction-A.png}
+      \caption{Bloque Reduction-A.}
+      \label{fig:Reduction-A}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{.45\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{Images/Reduction-B.png}
+      \caption{Bloque Reduction-B.}
+      \label{fig:Reduction-B}
+    \end{subfigure}
+    \caption{Módulos empleados en la arquitectura Inception-ResNet-v2 \cite{Inception-ResNet}.}
+    \label{fig:Inception-ResNet-v2Modules}
+\end{figure}
+
 %% INCEPTION-V3
 
 \begin{figure}
@@ -124,4 +168,13 @@
     \end{subfigure}
     \caption{Matrices de confusión del conjunto de evaluación de la base de datos FER-2013 estimadas sobre el modelo entrenado ResNet-50.}
     \label{fig:ResNet-50_matrices}
+\end{figure}
+
+%% CYCLEGAN METRICS
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{Images/CycleGAN_metrics.png}
+    \caption{Pérdidas del generador $A\rightarrow B$ y del discriminador $A$ de la red CycleGAN (\autoref{fig:CycleGANArchitecture}) a lo largo de su entrenamiento.}
+    \label{fig:CycleGAN_metrics}
 \end{figure}

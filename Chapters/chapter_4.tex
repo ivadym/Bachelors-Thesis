@@ -4,7 +4,7 @@ A continuación se van a desarrollar los conceptos y técnicas empleadas para la
 
 \section{Capas Empleadas en las Arquitecturas Propuestas} \label{Chapter:Layers}
 
-La forma más común de una arquitectura convolucional consiste en el apilamiento de algunas capas convolucionales y capas ReLU seguidas por capas de agrupación, repitiéndose este patrón hasta que la imagen de entrada disminuya espacialmente a un tamaño más reducido. En algunos puntos es común hacer transiciones a capas totalmente conectadas, de \textit{dropout} o capas de normalización. Sin embargo, en la práctica y en el 90\% de las aplicaciones el tipo de estructura es prácticamente intrascendente ya que las CNN son diseñadas o entrenadas desde cero tan sólo en ocasiones excepcionales \cite{CS231n}.
+La forma más común de una arquitectura convolucional consiste en el apilamiento de algunas capas convolucionales y capas ReLU seguidas por capas de agrupación, repitiéndose este patrón hasta que la imagen de entrada disminuya espacialmente a un tamaño más reducido. En algunos puntos es común hacer transiciones a capas totalmente conectadas, de \textit{dropout} o capas de normalización. Sin embargo, en la práctica y en el 90\% de las aplicaciones el tipo de estructura es prácticamente intrascendente ya que las CNN son diseñadas o entrenadas desde cero tan solo en ocasiones excepcionales \cite{CS231n}.
 
 En otros términos, la disposición de la arquitectura convolucional más habitual, cuyas partes se describirán más detalladamente en los siguientes apartados, sigue el siguiente patrón:
 \begin{align*}
@@ -87,7 +87,7 @@ En la actualidad, la función no lineal más popular es la Unidad Lineal Rectifi
     \label{fig:ReLU}
 \end{figure}
 
-Anteriormente, en las redes neuronales se solían emplear funciones de activación más suaves (sigmoide, tangente hiperbólica, etc.), sin embargo, las ReLU generalmente permiten un aprendizaje mucho más rápido en redes profundas, acelerando el proceso incluso por un factor de 6 gracias a su forma lineal no saturante \cite{Krizhevsky}. Además, presentan un menor coste computacional ya que su implementación tan sólo requiere la aplicación de un umbral a una matriz de activación en cero, evitando, de esta manera, las costosas operaciones exponenciales de otras funciones.
+Anteriormente, en las redes neuronales se solían emplear funciones de activación más suaves (sigmoide, tangente hiperbólica, etc.), sin embargo, las ReLU generalmente permiten un aprendizaje mucho más rápido en redes profundas, acelerando el proceso incluso por un factor de 6 gracias a su forma lineal no saturante \cite{Krizhevsky}. Además, presentan un menor coste computacional ya que su implementación tan solo requiere la aplicación de un umbral a una matriz de activación en cero, evitando, de esta manera, las costosas operaciones exponenciales de otras funciones.
 
 A pesar de todo ello, mediante la función de activación ReLU no es posible computar las probabilidades de pertenencia de una entrada a unas determinadas clases de salida al ser los valores calculados por esta expresión difíciles de interpretar. En consecuencia, es necesario introducir e implementar una nueva función de activación, típicamente en la última capa de la arquitectura, para medir la compatibilidad de un conjunto de parámetros con respecto a las distintas categorías posibles. Esta habilidad, precisamente, es reunida por la función exponencial normalizada o SoftMax.
 
@@ -114,12 +114,12 @@ La operación de \textit{droput} es una técnica que permite evitar el sobreapre
 
 \begin{figure}
     \centering
-    \includegraphics[scale=0.25]{Images/Dropout.png}
+    \includegraphics[scale=0.2]{Images/Dropout.png}
     \caption{Red neuronal estándar con 2 capas ocultas (izquierda) y red análoga a la anterior a la que se le ha aplicado la operación de \textit{dropout} (derecha) \cite{Srivastava}.}
     \label{fig:Dropout}
 \end{figure}
 
-Su funcionamiento es bastante simple, ya que consiste en el apagado aleatorio, en cada una de las iteraciones del proceso de aprendizaje, de una serie de unidades neuronales con una probabilidad de $1 - p$. Cabe destacar que esta red reducida mantiene los pesos originales de las neuronas desactivadas, eliminándose, tan sólo, las conexiones entrantes y salientes, tal y como se muestra en la \autoref{fig:Dropout}.
+Su funcionamiento es bastante simple, ya que consiste en el apagado aleatorio, en cada una de las iteraciones del proceso de aprendizaje, de una serie de unidades neuronales con una probabilidad de $1 - p$. Cabe destacar que esta red reducida mantiene los pesos originales de las neuronas desactivadas, eliminándose, tan solo, las conexiones entrantes y salientes, tal y como se muestra en la \autoref{fig:Dropout}.
 
 Esta técnica principalmente minimiza el impacto de las neuronas con activaciones dominantes, lo que proporciona a su vez un entorno de mayor independencia entre las distintas unidades durante el entrenamiento. Asimismo, su empleo también consigue mejorar significativamente la velocidad de entrenamiento al reducirse el número de interacciones entre los nodos, lo que además da lugar a una respuesta más generalizada por parte de la arquitectura ante la inserción de datos nuevos.
 
@@ -133,7 +133,7 @@ Esta forma de abordar los problemas de aprendizaje profundo se debe a que para c
 
 Existen dos escenarios principales del aprendizaje transferido:
 \begin{itemize}
-  \item \textbf{Extracción de características fijas}. Se emplea una CNN entrenada previamente con una base de datos determinada y a la que se le elimina la última capa totalmente conectada, introduciéndose en su lugar un clasificador instruido con un nuevo conjunto de datos. De esta forma, la red original tan sólo funciona como un extractor de características fijo, mientras que el predictor insertado posibilita una clasificación particularizada.
+  \item \textbf{Extracción de características fijas}. Se emplea una CNN entrenada previamente con una base de datos determinada y a la que se le elimina la última capa totalmente conectada, introduciéndose en su lugar un clasificador instruido con un nuevo conjunto de datos. De esta forma, la red original tan solo funciona como un extractor de características fijo, mientras que el predictor insertado posibilita una clasificación particularizada.
   \item \textbf{Afinación de modelos}. En esta ocasión no sólo se remplaza y reentrena el clasificador de la parte superior de la CNN con el nuevo conjunto de datos, sino que también son ajustados los pesos de la red inicial mediante la continuación del proceso de retropropagación. Asimismo, es posible afinar un número determinado de capas, generalmente las superiores, manteniendo fijos los pesos de las demás. Esto es especialmente útil para evitar el sobreaprendizaje al ser las CNN sensibles a características más genéricas en los niveles iniciales y más específicas en los finales.
 \end{itemize}
 
@@ -200,11 +200,11 @@ Resumidamente, en el ámbito particular de este proyecto, la utilización de est
 
 \section{Detección de rostros en tiempo real} \label{Chapter:FaceDetection}
 
-Para conseguir una integración efectiva del módulo que reconoce las expresiones faciales y del sistema empotrado, encargado de proporcionarle al sistema principal imágenes capturadas en tiempo real y a partir de las cuales se extrae tan sólo el rostro del individuo concreto, se emplea, tal y como se ha mencionado en la \autoref{Chapter:OpenCV}, la librería de visión artificial OpenCV. Este entorno es especialmente adecuado para las tareas aquí planteadas ya que proporciona diversos tipos de clasificadores o detectores ya entrenados y encapsulados en ficheros XML, que pueden ser aprovechados para una gran variedad de tareas.
+Para conseguir una integración efectiva del módulo que reconoce las expresiones faciales y del sistema empotrado, encargado de proporcionarle al sistema principal imágenes capturadas en tiempo real y a partir de las cuales se extrae tan solo el rostro del individuo concreto, se emplea, tal y como se ha mencionado en la \autoref{Chapter:OpenCV}, la librería de visión artificial OpenCV. Este entorno es especialmente adecuado para las tareas aquí planteadas ya que proporciona diversos tipos de clasificadores o detectores ya entrenados y encapsulados en ficheros XML, que pueden ser aprovechados para una gran variedad de tareas.
 
 \begin{figure}
     \centering
-    \includegraphics[scale=0.8]{Images/Haar.png}
+    \includegraphics[scale=0.75]{Images/Haar.png}
     \caption{Características seleccionadas por AdaBoost. La primera característica mide la diferencia de intensidad entre la región de los ojos y la región superior de las mejillas, mientras que la segunda compara las intensidades de las regiones oculares con la del puente de la nariz \cite{Viola}.}
     \label{fig:Haar}
 \end{figure}

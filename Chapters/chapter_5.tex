@@ -28,7 +28,7 @@ Inception-v3 es el resultado de las investigaciones llevadas a cabo por el equip
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{Images/InceptionModules.png}
+    \includegraphics[width=0.8\textwidth]{Images/InceptionModules.png}
     \caption{Módulos Inception empleados en la arquitectura Inception-v3. Estos bloques son utilizados para promover las representaciones de alta dimensión (izquierda) y la factorización de las convoluciones de dimensión $n\times n$ (derecha) \cite{Inception-v3}.}
     \label{fig:InceptionModules}
 \end{figure}
@@ -50,49 +50,7 @@ Inception-ResNet-v2 es una ampliación, llevada a cabo por el grupo de inteligen
     \label{fig:Inception-ResNet-v2}
 \end{figure}
 
-\begin{figure}
-    \centering
-    \begin{subfigure}[t]{.45\textwidth}
-      \centering
-      \includegraphics[width=.8\linewidth]{Images/Inception-ResNet-A.png}
-      \caption{Bloque Inception-ResNet-A.}
-      \label{fig:Inception-ResNet-A}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[t]{.45\textwidth}
-      \centering
-      \includegraphics[width=.8\linewidth]{Images/Inception-ResNet-B.png}
-      \caption{Bloque Inception-ResNet-B.}
-      \label{fig:Inception-ResNet-B}
-    \end{subfigure}
-    
-    \vspace{1cm}
-    \begin{subfigure}[t]{.45\textwidth}
-      \centering
-      \includegraphics[width=.7\linewidth]{Images/Inception-ResNet-C.png}
-      \caption{Bloque Inception-ResNet-C.}
-      \label{fig:Inception-ResNet-C}
-    \end{subfigure}
-    
-    \vspace{1cm}
-    \begin{subfigure}[t]{.45\textwidth}
-      \centering
-      \includegraphics[width=.9\linewidth]{Images/Reduction-A.png}
-      \caption{Bloque Reduction-A.}
-      \label{fig:Reduction-A}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[t]{.45\textwidth}
-      \centering
-      \includegraphics[width=.9\linewidth]{Images/Reduction-B.png}
-      \caption{Bloque Reduction-B.}
-      \label{fig:Reduction-B}
-    \end{subfigure}
-    \caption{Módulos empleados en la arquitectura Inception-ResNet-v2 \cite{Inception-ResNet}.}
-    \label{fig:Inception-ResNet-v2Modules}
-\end{figure}
-
-La arquitectura sintetizada de este modelo se expone en la \autoref{fig:Inception-ResNet-v2}. Como puede observarse, a parte de las estructuras de entrada y de clasificación, cuyo funcionamiento es análogo al descrito en la \autoref{Chapter:ArchitectureInceptionV3}, esta red está formada principalmente por 5 módulos Inception distintos y denominados como Inception-ResNet-A, Reduction-A, Inception-ResNet-B, Reduction-B e Inception-ResNet-C. Estos tipos de bloques, representados en la \autoref{fig:Inception-ResNet-v2Modules}, tienen dos propósitos diferentes, encargándose esencialmente de la construcción de los mapas de características de los datos de entrada y de la reducción de estos espacios de activación con el fin de obtener unas representaciones homólogas de menor tamaño. 
+La arquitectura sintetizada de este modelo se expone en la \autoref{fig:Inception-ResNet-v2}. Como puede observarse, a parte de las estructuras de entrada y de clasificación, cuyo funcionamiento es análogo al descrito en la \autoref{Chapter:ArchitectureInceptionV3}, esta red está formada principalmente por 5 módulos Inception distintos y denominados como Inception-ResNet-A, Reduction-A, Inception-ResNet-B, Reduction-B e Inception-ResNet-C. Estos tipos de bloques, representados en la \autoref{fig:Inception-ResNet-v2Modules} del \autoref{Appendix:Figures}, tienen dos propósitos diferentes, encargándose esencialmente de la construcción de los mapas de características de los datos de entrada y de la reducción de estos espacios de activación con el fin de obtener unas representaciones homólogas de menor tamaño. 
 
 De forma concreta y tras procesarse inicialmente las imágenes en la entrada, esta información es inyectada en los bloques Inception-ResNet-A de la \autoref{fig:Inception-ResNet-A}, que mediante el uso de filtros de dimensiones reducidas ($1\times 1$ y $3\times 3$) son capaces de detectar características muy básicas y disminuir el tamaño de las fotografías. Tras ello, estos datos son introducidos en el módulo Reducción-A expuesto en la \autoref{fig:Reduction-A}, que condensa aún más las dimensiones de las representaciones a fin de acelerar el entrenamiento de los posteriores bloques Inception-ResNet-B de la \autoref{fig:Inception-ResNet-B}. Estos últimos, de hecho, contienen un número menor de capas que sus predecesores Inception-ResNet-A, aunque utilizan filtros de mayor tamaño ($1\times 1$, $1\times 7$ y $7\times 1$) con el propósito de detectar características más complejas. Posteriormente, los resultados de estos últimos módulos son transferidos a la estructura Reduction-B que al contar con más capas que Reduction-A, como puede observarse en la \autoref{fig:Reduction-B}, es capaz de hacer frente a una mayor cantidad de datos que son la consecuencia directa del empleo de filtros de mayores dimensiones en los bloques Inception-ResNet-B. Toda esta información reducida es transferida seguidamente a los módulos Inception-ResNet-C, mostrados en la \autoref{fig:Inception-ResNet-C}, y que debido al aumento de la complejidad de la arquitectura emplean en esta ocasión un número reducido de filtros para aminorar el coste temporal del entrenamiento. Finalmente, la conexión secuencial de todos estos bloques según la \autoref{fig:Inception-ResNet-v2} da lugar a una red con una profundidad considerable, que tras extraer las características de las imágenes inyectadas en la entrada procederá a categorizarlas mediante el módulo clasificador adaptado al contexto del reconocimiento de expresiones faciales y con una arquitectura idéntica a la del modelo Inception-v3.
 
@@ -100,7 +58,7 @@ De forma concreta y tras procesarse inicialmente las imágenes en la entrada, es
 
 \begin{figure}
     \centering
-    \includegraphics[scale=0.2]{Images/ResnetBlock.png}
+    \includegraphics[scale=0.18]{Images/ResnetBlock.png}
     \caption{Bloque residual básico \cite{ResNet}.}
     \label{fig:ResNetBlock}
 \end{figure}
@@ -151,7 +109,7 @@ En este proyecto, los objetivos principales del preprocesamiento del conjunto de
                 \begin{align} \label{eq:PreprocessResNet}
                   \hat{x} &= x - \overline{x} = x - 128.8006 & \forall \text{\space} x \in [0, 255]
                 \end{align}
-            Asimismo, el valor de esta media se ha calculado tan sólo sobre los datos de entrenamiento del conjunto FER-2013, aplicándose posteriormente a los grupos de validación y evaluación. 
+            Asimismo, el valor de esta media se ha calculado tan solo sobre los datos de entrenamiento del conjunto FER-2013, aplicándose posteriormente a los grupos de validación y evaluación. 
         \end{itemize}
         
   \item \textbf{Transformaciones geométricas}. Tal y como se ha visto en la \autoref{Chapter:GeometricTransformations}, la aplicación de una serie de transformaciones geométricas a las imágenes del conjunto de entrenamiento puede enriquecer la base de datos empleada. Por ello, en el caso particular de este proyecto se realizan las siguientes conversiones lineales de forma pseudoaleatoria en cada iteración del entrenamiento:
@@ -166,7 +124,7 @@ En este proyecto, los objetivos principales del preprocesamiento del conjunto de
 
 \subsection{Proceso de Aprendizaje}
 
-El procedimiento llevado a cabo para conseguir un aprendizaje efectivo en cada uno de los modelos ha consistido, en primer lugar, en un entrenamiento tan sólo de las capas de la etapa de clasificación particularizada al problema del reconocimiento de expresiones faciales. Tras esta técnica para evitar una inicialización aleatoria de los niveles superiores se ha seguido con un entrenamiento íntegro de los modelos completos, que es precisamente sobre el cual se van a reportar los resultados finales.
+El procedimiento llevado a cabo para conseguir un aprendizaje efectivo en cada uno de los modelos ha consistido, en primer lugar, en un entrenamiento tan solo de las capas de la etapa de clasificación particularizada al problema del reconocimiento de expresiones faciales. Tras esta técnica para evitar una inicialización aleatoria de los niveles superiores se ha seguido con un entrenamiento íntegro de los modelos completos, que es precisamente sobre el cual se van a reportar los resultados finales.
 
 En este contexto, se procede a describir a continuación algunas de las características compartidas del proceso de aprendizaje de los tres modelos descritos anteriormente (Inception-v3, Inception-ResNet-v2 y ResNet-50):
 \begin{itemize}
@@ -179,8 +137,8 @@ En este contexto, se procede a describir a continuación algunas de las caracter
                & \text{ correcta, es decir, $p = [0, ... 1, ..., 0]$ contiene un único $1$ en la posición iésima} \notag \\
             q(x) & \equiv \text{distribución estimada} \notag
     \end{align}
-    \item \textbf{Iteraciones de entrenamiento de las capas superiores}. Dado que el objetivo del entrenamiento de la etapa de clasificación introducida es la obtención de unos resultados ligeramente superiores a los obtenidos con la inicialización aleatoria, que ajusta los pesos iniciales con una distribución uniforme en el intervalo $[-0.05, 0.05]$, se ha estipulado un número de tan sólo 5 iteraciones, que ha permitido alcanzar tasas de acierto en esta subred de entre el 20\% y el 30\%.
-    \item \textbf{Optimizador empleado en el entrenamiento de las capas superiores}. En la práctica, el optimizador Adam es recomendado como el algoritmo predeterminado para las tareas de aprendizaje profundo ya que su uso requiere un menor número de iteraciones para converger que la alternativa SGD y sus variantes \cite{CS231n}. Sin embargo, este optimizador es propenso en algunas ocasiones a no alcanzar la convergencia más óptima \cite{AdamToSDG}, aunque dado que la etapa de clasificación introducida tan sólo se va a entrenar durante 5 iteraciones en este punto, este hecho carece de importancia. Los parámetros utilizados son los especificados por defecto en el artículo que describe este algoritmo \cite{Adam} y cuya notación está vinculada a lo descrito en la \autoref{Chapter:Adam} y concretamente a la \autoref{eq:Adam}: $\lambda = 0.001, \beta_1 = 0.9, \beta_2 = 0.999, \epsilon = 10^{-8}$.
+    \item \textbf{Iteraciones de entrenamiento de las capas superiores}. Dado que el objetivo del entrenamiento de la etapa de clasificación introducida es la obtención de unos resultados ligeramente superiores a los obtenidos con la inicialización aleatoria, que ajusta los pesos iniciales con una distribución uniforme en el intervalo $[-0.05, 0.05]$, se ha estipulado un número de tan solo 5 iteraciones, que ha permitido alcanzar tasas de acierto en esta subred de entre el 20\% y el 30\%.
+    \item \textbf{Optimizador empleado en el entrenamiento de las capas superiores}. En la práctica, el optimizador Adam es recomendado como el algoritmo predeterminado para las tareas de aprendizaje profundo ya que su uso requiere un menor número de iteraciones para converger que la alternativa SGD y sus variantes \cite{CS231n}. Sin embargo, este optimizador es propenso en algunas ocasiones a no alcanzar la convergencia más óptima \cite{AdamToSDG}, aunque dado que la etapa de clasificación introducida tan solo se va a entrenar durante 5 iteraciones en este punto, este hecho carece de importancia. Los parámetros utilizados son los especificados por defecto en el artículo que describe este algoritmo \cite{Adam} y cuya notación está vinculada a lo descrito en la \autoref{Chapter:Adam} y concretamente a la \autoref{eq:Adam}: $\lambda = 0.001, \beta_1 = 0.9, \beta_2 = 0.999, \epsilon = 10^{-8}$.
     \item \textbf{Iteraciones de entrenamiento del modelo completo}. Los tres modelos tienen especificado un entrenamiento de 100 iteraciones sobre la arquitectura completa, aunque tal y como se verá a continuación se ha considerado conveniente interrumpir el proceso de aprendizaje en el momento en el que vayan apareciendo indicios de convergencia con el propósito de no consumir recursos de forma innecesaria.
 \end{itemize}
 
@@ -204,57 +162,44 @@ Finalmente cabe destacar que tanto en este modelo como en los anteriores se hace
 
 \subsection{Despliegue en la Plataforma Google Cloud}
 
-Para realizar el entrenamiento de los modelos Inception-v3, Inception-ResNet-v2 y ResNet-50 se ha empleado la herramienta descrita en la \autoref{Chapter:GoogleCloud} y conocida como Cloud Datalab. El motivo detrás de esta decisión es que este servicio es precisamente el que permite un despliegue más inmediato de los modelos al emular el funcionamiento de los \textit{notebooks} de Python y la que ofrece la GPU con las mejores características en términos de desempeño y memoria (NVIDIA Tesla P100). De hecho, el empleo de la herramienta alternativa (Cloud Machine Learning Engine) implica una reducción excesiva del tamaño de los lotes, lo que no favorece para nada el tiempo de entrenamiento, al ofrecer tan sólo los servicios de la GPU NVIDIA Tesla K80, con un tamaño de memoria que es la mitad que la de la GPU NVIDIA Tesla P100.
+Para realizar el entrenamiento de los modelos Inception-v3, Inception-ResNet-v2 y ResNet-50 se ha empleado la herramienta descrita en la \autoref{Chapter:GoogleCloud} y conocida como Cloud Datalab. El motivo detrás de esta decisión es que este servicio es precisamente el que permite un despliegue más inmediato de los modelos al emular el funcionamiento de los \textit{notebooks} de Python y la que ofrece la GPU con las mejores características en términos de desempeño y memoria (NVIDIA Tesla P100). De hecho, el empleo de la herramienta alternativa (Cloud Machine Learning Engine) implica una reducción excesiva del tamaño de los lotes, lo que no favorece para nada el tiempo de entrenamiento, al ofrecer tan solo los servicios de la GPU NVIDIA Tesla K80, con un tamaño de memoria que es la mitad de la disponible en la NVIDIA Tesla P100.
 
 \section{Resultados} \label{Chapter:Results}
 
+
 \begin{table}
-    \centering
-    \begin{tabular}{c|c|c|c|c|c|}
-    \cline{2-6}
-    & \textbf{\begin{tabular}[c]{@{}c@{}}Tasa de\\ acierto\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Tiempo de\\ entrenamiento\end{tabular}} & \textbf{Iteraciones} & \textbf{\begin{tabular}[c]{@{}c@{}}Número de\\ parámetros\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Tamaño del\\ modelo\end{tabular}} \\ \hline
-    \multicolumn{1}{|c|}{\textbf{Inception-v3}} & 0.6386 & 5h 9m 37s & 80 & 23\,873\,703 & 192.1 MB \\ \hline
-    \multicolumn{1}{|c|}{\textbf{Inception-ResNet-v2}} & 0.6500 & 1h 4m 26s & 27 & 55\,857\,255 & 449.3 MB \\ \hline
-    \multicolumn{1}{|c|}{\textbf{ResNet-50}} & 0.7125 & 2h 29m 45s & 40 & 25\,613\,383 & 308.3 MB \\ \hline
+\centering
+    \begin{tabular}{c|c|c|c|c|}
+    \cline{2-5}
+    & \textbf{\begin{tabular}[c]{@{}c@{}}Tasa de\\ acierto\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Duración del\\ entrenamiento\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Número de\\ parámetros\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Tamaño del\\ modelo\end{tabular}} \\ \hline
+    \multicolumn{1}{|c|}{\textbf{Inception-v3}} & 0.6386 & \begin{tabular}[c]{@{}c@{}}5h 9m 37s\\ (80 iteraciones)\end{tabular} & 23\,873\,703 & 192.1 MB \\ \hline
+    \multicolumn{1}{|c|}{\textbf{Inception-ResNet-v2}} & 0.6500 & \begin{tabular}[c]{@{}c@{}}1h 4m 26s\\ (27 iteraciones)\end{tabular} & 55\,857\,255 & 449.3 MB \\ \hline
+    \multicolumn{1}{|c|}{\textbf{ResNet-50}} & 0.7125 & \begin{tabular}[c]{@{}c@{}}2h 29m 45s\\ (40 iteraciones)\end{tabular} & 25\,613\,383 & 308.3 MB \\ \hline
     \end{tabular}
 \caption{Comparación entre las características de los distintos modelos empleados y su desempeño sobre el conjunto de evaluación de la base de datos FER-2013.}
 \label{Table:Models}
 \end{table}
 
+Los resultados de los entrenamientos, junto con las características principales de los modelos empleados y su comparación, se encuentran sintetizados en la \autoref{Table:Models}. De igual manera, ciertas métricas extraídas a lo largo del entrenamiento se pueden encontrar en el \autoref{Appendix:Figures}. Concretamente, han sido monitorizadas las tasas de acierto y las pérdidas, resultando sus valores particularmente útiles a lo largo del proceso de aprendizaje ya que han permitido disponer de una realimentación directa del desempeño de los modelos sobre el conjunto de validación de la base de datos FER-2013, y por lo tanto de su convergencia, en cada instante del entrenamiento.
 
-Los resultados de los entrenamientos se encuentran sintetizados en la \autoref{Table:Models}. 
-
-
-
-\begin{table}[]
-\centering
-\caption{My caption}
-\label{my-label}
-\begin{tabular}{c|c|c|c|c|c|}
-\cline{2-6}
- & \textbf{\begin{tabular}[c]{@{}c@{}}Tasa de\\ acierto\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Tiempo de\\ entrenamiento\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Iteraciones de\\ entrenamiento\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Número de\\ parámetros\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Tamaño del\\ modelo\end{tabular}} \\ \hline
-\multicolumn{1}{|c|}{\textbf{Inception-v3}} & 0.6386 & 5h 9m 37s & 80 & 23,873,703 & 192.1 MB \\ \hline
-\multicolumn{1}{|c|}{\textbf{Inception-ResNet-v2}} & 0.6500 & 1h 4m 26s & 27 & 55,857,255 & 449.3 MB \\ \hline
-\multicolumn{1}{|c|}{\textbf{ResNet-50}} & 0.7125 & 2h 29m 45s & 40 & 25,613,383 & 308.3 MB \\ \hline
-\end{tabular}
-\end{table}
-
+En lo que respecta a los resultados finales, los modelos han sido examinados sobre el conjunto de evaluación, usándose este grupo exclusivamente para este propósito con el fin de obtener una serie de rendimientos que puedan ser comparados directamente con los planteados en la \autoref{Chapter:RelatedWork}. Asimismo y con el objetivo de evitar el sobreaprendizaje, los sistemas que han sido elegidos para la evaluación son los que corresponden precisamente con las iteraciones de menor pérdida del proceso de entrenamiento completo.
 
 \subsection{Inception-v3}
 
-\cite{Inception-v3}
+Esta primera aproximación al problema del reconocimiento de expresiones faciales ha permitido alcanzar una tasa de acierto de $63.86\%$ con el modelo de la iteración $60$, posterior a la cual no se ha conseguido mejorar la pérdida de $1.0664$ sobre el conjunto de validación e interrumpiéndose el entrenamiento tras observarse una convergencia tras las 80 primeras iteraciones, tal y como puede observarse en la \autoref{fig:Inception-v3_loss} del \autoref{Appendix:Figures}.
+
+En cuanto al desempeño del modelo sobre el conjunto de evaluación particularizado para cada clase, éste se expone mediante las matrices de confusión de la \autoref{fig:Inception-v3_matrices}. De estas representaciones se puede concluir que, tal y como se intuyó en un primer momento, los mejores resultados son obtenidos en las categorías con mayor representación (alegría). Por otro lado, también se puede observar que hay ciertas clases cuyas diferencias entre sí en lo que respecta a la expresión facial son más sutiles, lo cual, aunado al hecho de tener unos datos bastante limitados, da lugar a numerosas asignaciones incorrectas (entre las clases de asco e ira, entre la expresión de tristeza y la neutral, etc.).
+
+Finalmente, este resultado obtenido con tan solo 5 horas de entrenamiento puede parecer aceptable en un primer momento dado que hasta los modelos más simples entrenados desde cero, y contando con solamente 3 módulos Inception, requieren de un tiempo de aprendizaje de más de 20 horas para alcanzar resultados semejantes \cite{FERTime}. Sin embargo, objetivamente y con respecto a los trabajos similares de la \autoref{Chapter:RelatedWork}, este desempeño es bastante pobre.
 
 \subsection{Inception-ResNet-v2}
 
-
-\cite{Inception-ResNet}
-
+La implementación de este modelo surge como un intento de optimizar los resultados obtenidos inicialmente mediante el sistema Inception-v3. En esta ocasión, al emplearse unos parámetros más agresivos, el tiempo de convergencia se reduce bastante, obteniéndose una tasa de acierto de $65.00\%$ con el modelo entrenado con tan solo $17$ iteraciones, a partir de las cuales se produce un estancamiento de las pérdidas en torno a $1.0353$, lo que puede comprobarse en la \autoref{fig:Inception-ResNet-v2_loss}. A pesar de ir disminuyendo periódicamente la tasa de aprendizaje, es posible que ésta sea demasiado alta en un primer momento y que no se haya alcanzado la región de convergencia óptima, sin embargo, la diferencia en este caso sería intrascendente. Además, mediante el desarrollo de este modelo se buscaba obtener una mejora sustancial que al no ser alcanzada ha propiciado la llegada a la conclusión de que la base de datos ImageNet sobre la que están preentrenados los modelos Inception-v3 e Inception-ResNet-v2, al diferir en gran medida con el objetivo tratado en este proyecto, no es la adecuada para una transferencia de aprendizaje basada en expresiones faciales. Por todo ello, y a pesar de volver a obtener unos resultados aceptables y mejorar ligeramente el desempeño de las clases menos representadas (\autoref{fig:Inception-ResNet-v2_matrices}) con un tiempo de entrenamiento de apenas 1 hora, se ha optado por explorar los modelos preentrenados con bases de datos exclusivamente de rostros.
 
 \subsection{ResNet-50}
 
-\cite{ResNet}
+Esta red, cuyos pesos iniciales han sido transferidos a la API de Keras desde el modelo ResNet-50 entrenado mediante el \textit{framework} Caffe sobre el conjunto VGGFace2, es la que con diferencia ha permitido obtener los mejores resultados sobre la fracción de evaluación de la base de datos FER-2013 con respecto a los modelos anteriores. De hecho, la tasa de acierto final alcanzada, de $71.25\%$, ha superado tanto a la mejor marca obtenida en el desafío original en el que se propuso el conjunto FER-2013 \cite{FER-2013}, como a la gran parte de las publicaciones académicas de los últimos años, quedando a tan solo 4 puntos por debajo de los complejos modelos estado del arte que son el resultado de reunir y aunar múltiples redes profundas \cite{Pramerdorfer}. Además, cabe destacar que el desempeño humano en este contexto es del $65\pm 5\%$ \cite{FER-2013_human_acc}, lo que evidencia la ambigüedad de esta base de datos y la dificultad de obtener sobre ella resultados aceptables.
 
+A pesar de todo ello, lo más destacable de la tasa aquí alcanzada es que este valor es consecuencia de un entrenamiento sobre la GPU NVIDIA Tesla P100 de apenas 2 horas y media. Concretamente, el modelo utilizado para la evaluación corresponde a la iteración $30$ del aprendizaje, en el que se alcanzó un mínimo de pérdidas de $0.9049$, tal y como se puede comprobar en la \autoref{fig:ResNet-50_loss}. Esta reducción de pérdidas en relación a los modelos Inception también ha permitido aumentar notablemente el número de clasificaciones correctas de las clases con menor representación, alcanzándose unas tasas superiores al $60\%$ en prácticamente todas las categorías, tal y como lo reflejan las matrices de confusión de la \autoref{fig:ResNet-50_matrices}.
 
-
-
-
+Por último y como puede observarse en la \autoref{Table:Models}, esta arquitectura también permite disminuir ligeramente el tamaño del modelo con respecto a la red Inception-ResNet-v2, que es un parámetro que puede resultar crítico en caso de que se pretenda desplegar este sistema en un sistema empotrado o dispositivo móvil.

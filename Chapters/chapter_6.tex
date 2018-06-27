@@ -9,7 +9,7 @@ Obtenidos unos resultados más que aceptables y eficientes en lo que respecta al
     \begin{subfigure}[t]{0.8\textwidth}
       \centering
       \includegraphics[width=\linewidth]{Images/CycleGANArchitecture.png}
-      \caption{Estructura global de la red CycleGAN.}
+      \caption{Estructura completa de la red CycleGAN.}
       \label{fig:CycleGAN_general}
     \end{subfigure}
     
@@ -61,9 +61,9 @@ La función de esta red es básicamente tratar de predecir si la imagen introduc
 
 \subsection{Preprocesamiento de los datos}
 
-Teniendo en cuenta la diversidad de las imágenes del conjunto FER-2013, en esta ocasión tan sólo se va a proceder a realizar un preprocesamiento sutil, que además permitirá disminuir el coste computacional de la red. Por ello, se realizan únicamente las siguientes transformaciones:
+Teniendo en cuenta la diversidad de las imágenes del conjunto FER-2013, en esta ocasión tan solo se va a proceder a realizar un preprocesamiento sutil, que además permitirá disminuir el coste computacional de la red. Por ello, se realizan únicamente las siguientes transformaciones:
 \begin{itemize}
-    \item \textbf{Redimensionamiento}. Dado que la entrada de la arquitectura CycleGAN ha sido ajustada para aceptar las imágenes de la base de datos FER-2013 con la resolución por defecto ($48 \times 48$), tan sólo se realiza una replicación de los datos en escala de gris a los tres espacios de color RGB.
+    \item \textbf{Redimensionamiento}. Dado que la entrada de la arquitectura CycleGAN ha sido ajustada para aceptar las imágenes de la base de datos FER-2013 con la resolución por defecto ($48 \times 48$), tan solo se realiza una replicación de los datos en escala de gris a los tres espacios de color RGB.
     \item \textbf{Normalización}. El modelo de color RGB de las imágenes de la entrada se adapta al intervalo $[-1, 1]$ mediante la \autoref{eq:PreprocessInception} ya vista anteriormente.
     \item \textbf{Volteo horizontal}. Esta transformación geométrica de carácter aleatorio es la única que se va a aplicar en vista de su eficacia computacional y de enriquecimiento del conjunto de entrada.
 \end{itemize}
@@ -84,3 +84,44 @@ El proceso de entrenamiento de esta arquitectura ha seguido los puntos descritos
 En esta ocasión el entrenamiento en la plataforma de Google Cloud se ha realizado mediante la herramienta Cloud Machine Learning Engine descrita en la \autoref{Chapter:GoogleCloud} y empleando la GPU NVIDIA Tesla K80. Esto es debido a que ya no se presentan las limitaciones de memoria anteriormente existentes al utilizarse esta vez un número bastante inferior de imágenes que reúnen solo las emociones de la clases neutral y asco.
 
 \section{Resultados}
+
+En un primer momento y dado que en cada iteración el número de datos inyectados al modelo está limitado por la cantidad de imágenes de la clase con menor representación, en este caso la etiquetada con la expresión de asco, se estipuló un entrenamiento de $30\,000$ iteraciones considerando, además, los entornos comunes de implementación \cite{RSGAN}. Sin embargo y como se puede intuir, estos modelos son muy costosos de entrenar y más en situaciones como la aquí propuesta donde se intenta establecer una correlación entre una categoría con $4\,965$ imágenes (neural) y una con $436$ (asco). Por ello, debido a las limitaciones económicas de la prueba gratuita de Google Cloud, esta red únicamente ha podido ser entrenada durante $7\,300$ iteraciones, empleando para ello unas 57 horas aproximadamente.
+
+En la \autoref{fig:CycleGAN_metrics} del \autoref{Appendix:Figures} se pueden consultar las pérdidas del generador y del discriminador de este entrenamiento parcial. Desafortunadamente, éstas son muy poco intuitivas ya que la mejora de las métricas de uno de estos dos módulos implica la degradación de la respuesta del otro. El funcionamiento esperado, por lo tanto, es que tanto las pérdidas del generador como las del discriminador converjan hacia valores constantes.
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[t]{.45\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{Images/CycleGAN_0.png}
+      \caption{Imágenes extraídas en la iteración $0$.}
+      \label{fig:CycleGAN_0}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{.45\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{Images/CycleGAN_500.png}
+      \caption{Imágenes extraídas en la iteración $500$.}
+      \label{fig:CycleGAN_500}
+    \end{subfigure}
+    
+    \vspace{1cm}
+    \begin{subfigure}[t]{.45\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{Images/CycleGAN_4000.png}
+      \caption{Imágenes extraídas en la iteración $4\,000$.}
+      \label{fig:CycleGAN_4000}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{.45\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{Images/CycleGAN_7300.png}
+      \caption{Imágenes extraídas en la iteración $7\,300$.}
+      \label{fig:CycleGAN_7300}
+    \end{subfigure}
+    \caption{Imágenes extraídas de la red CycleGAN durante el entrenamiento.}
+    \label{fig:CycleGAN_images}
+\end{figure}
+
+Por otro lado, en la \autoref{fig:CycleGAN_images} se puede observar la progresión de unas determinadas imágenes a lo largo de este entrenamiento incompleto. Son visibles los indicios que muestran que la red progresa convenientemente, logrando apreciarse incluso en las últimas iteraciones (\autoref{fig:CycleGAN_7300}) la intensificación de la expresión neutral y un cierto suavizado en la expresión de asco.
+

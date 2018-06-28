@@ -1,6 +1,27 @@
-\chapter{Integración del modelo dentro de un espejo inteligente} \label{Chapter:7}
+\chapter{Integración del Modelo en un Sistema Empotrado} \label{Chapter:7}
 
-%En lo que respecta a este proceso automatizado de reconocimiento, y dado que los ordenadores captan la información de su entorno gracias a los distintos sensores que incorporan, se pueden establecer los siguientes criterios para un diseño y una identificación eficiente \cite{Picard}:
+Teniendo en cuenta la calidad del modelo desarrollado en última instancia, se ha tomado la decisión de darle un uso directo mediante su integración en un sistema empotrado, y por consiguiente en un prototipo de espejo inteligente, de tal manera que pueda ser empleado para proporcionar una gran variedad de servicios.
+
+En lo que respecta a este proceso automatizado de reconocimiento, y dado que los ordenadores captan la información de su entorno gracias a los distintos sensores que incorporan, se establecen los siguientes criterios de diseño para una identificación eficiente \cite{Picard}:
+\begin{itemize}
+    \item \textbf{Entrada}. Extracción de imágenes del rostro del individuo identificado mediante una cámara web en tiempo real.
+    \item \textbf{Preprocesamiento}. Adaptación de las fotografías tomadas a los estándares del modelo empleado.
+    \item \textbf{Razonamiento}. Estimación de la emoción por parte del sistema reconocedor a partir de las imágenes capturadas y procesadas periódicamente.
+    \item \textbf{Salida}. Presentación de la expresión facial reconocida o toma de decisiones a partir de ésta.
+\end{itemize}
+
+Siguiendo estas pautas, se ha procedido a desarrollar una interfaz básica que al reconocer a un individuo concreto (módulo ya implementado previamente en el prototipo del espejo) le proponga una serie de actividades en las que éste tenga que imitar una emoción determinada, cuantificándose el acierto o el fallo tras un periodo estipulado, así como el tiempo de respuesta del usuario. No obstante, dada la complejidad y el tamaño del modelo ResNet-50 entrenado, el sistema empotrado empleado (Raspberry Pi 3 Modelo B), de 1 GB de RAM, no fue capaz de asignar la memoria requerida por este módulo con la configuración por defecto. Para solucionar este problema, por lo tanto, se procedió a aumentar la memoria virtual de la Raspberry mediante el espacio de intercambio \textit{swap}, que permite encaminar y tratar la memoria desbordada en una región de almacenamiento secundario. Sin embargo, tal y como se intuía, estos accesos al disco duro ralentizan el funcionamiento del sistema y por lo tanto limitan la variedad de los servicios que puedan ofrecerse.
+
+Por otro lado, se ha realizado una entrevista de evaluación como una acción educativa dentro del marco del proyecto europeo \textit{mHealth tOol for parkinsOn’s disease training and rehabilitation at Patient’s home} (HOOP) del programa EIT Health \cite{EITHealth}. Este proyecto estudia el uso de dispositivos móviles para complementar las terapias del rehabilitador, permitiendo al paciente la realización de ejercicios de un modo continuado, independiente y ubicuo al tiempo. Además, estas actividades son monitorizados por medio de una serie de sensores cuyos datos son recolectados para su posterior valoración por parte del profesional correspondiente a través de una plataforma web. Por lo tanto, dentro del marco de este proyecto y a fin de identificar posibles aplicaciones del presente trabajo, se ha realizado un encuentro con la logopeda de la Asociación de Familiares de Enfermos de Alzheimer (AFA Parla). La interfaz que le ha sido presentada consistía en una interacción persona-computadora básica en la que al usuario se le va solicitando la escenificación de unas determinadas expresiones faciales. Asimismo, es ofrecida al individuo una realimentación en tiempo real de la intensidad de la emoción que está representando, que se computa como válida tras la superación de un determinado umbral, así como una representación de su propio rostro. Las ideas reportadas en esta entrevista, así como la valoración del producto por parte de esta profesional que puede consultarse en la \autoref{fig:Informe_2} del \autoref{Appendix:Miscellaneous}, son las enumeradas a continuación:
+\begin{itemize}
+    \item Dado que los ejercicios empleados con los pacientes con Parkinson comprenden comúnmente praxias y técnicas de relajación, respiración y entonación, parece más interesante enfocar los ejercicios de imitación de emociones a trastornos autistas.
+    \item Hay que tener en gran consideración el umbral de intensidad de la expresión facial a partir del cual se produce el acierto para evitar frustrar al usuario. También se ha reportado que sería muy interesante ir ajustando el umbral con respecto a la mejoría o degradación del estado de los pacientes.
+    \item Proposición de otras técnicas cuya implementación podría ser interesante en un futuro, como el reconocimiento de las emociones a partir del habla o la entonación.
+    \item Reportada la utilidad del espejo inteligente y alusión a técnicas cuya implementación podría ser de gran interés: ejercicios enfocados a praxias (especialmente a movimientos faciales concretos) y ejercicios que favorezcan la coordinación fonorespiratoria (soplado de una vela artificial o realización de actividades enfocados al tono y a la intensidad de la voz).
+    \item Es preferible desarrollar ejercicios variados, de corta duración y con un enfoque lúdico.
+    \item El producto debería estar encaminado a ser un soporte para el profesional durante el transcurso de la terapia.
+\end{itemize}
 
 
-modelos más simples/pequeño/móviles -> keras models
+
+

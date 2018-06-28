@@ -183,7 +183,7 @@ Al contrario que el método del descenso estocástico del gradiente, que permite
   \item \textbf{Propagación del Valor Cuadrático Medio (RMSProp)}, que también explota las tasas de aprendizaje adaptativas, basadas en este caso en el promedio de las magnitudes recientes de los gradientes, lo que proporciona buenos resultados para problemas ruidosos. 
 \end{itemize}
 
-De esta forma, Adam, además de almacenar un promedio del primer momento (la media), como en RMSProp, también utiliza el promedio de los segundos momentos de los gradientes (la varianza) para la actualización de los parámetros, proceso que se rige por la \autoref{eq:Adam}.
+De esta forma, Adam, además de almacenar un promedio del primer momento (media de medias), como en RMSProp, también utiliza el promedio de los segundos momentos de los gradientes (la varianza) para la actualización de los parámetros, proceso que se rige por la \autoref{eq:Adam}.
 \begin{align}
     m_t &= \beta_1 \cdot m_{t-1} + (1 - \beta_1) \cdot \nabla f(\omega_{t-1}) \label{eq:AdamBeta1}\\
     v_t &= \beta_2 \cdot v_{t-1} + (1 - \beta_2) \cdot \nabla^2 f(\omega_{t-1}) \label{eq:AdamBeta2}\\
@@ -195,7 +195,7 @@ De esta forma, Adam, además de almacenar un promedio del primer momento (la med
     m_t \text{\space y \space} v_t &\equiv \text{estimaciones del primer y segundo momento,} \notag \\
     \hat{m}_t \text{\space y \space} \hat{v}_t &\equiv \text{estimaciones del primer y segundo momento corregidas} \notag
 \end{align}
-De forma específica, este algoritmo englobado en la \autoref{eq:Adam} calcula en un primer momento un promedio exponencial del gradiente ($m_t$) y del gradiente cuadrado ($v_t$), cuyas tasas de descenso son controladas mediante los parámetros $\beta_1$ y $\beta_2$. Por otro lado, como $m_t$ y $v_t$ son inicialmente nulos, es necesario aplicarles una corrección para evitar su sesgado hacia cero, especialmente notable durante las primeras iteraciones. Tras ello, se realiza la actualización de los parámetros de manera análoga al método del descenso estocástico del gradiente.
+De forma específica, este algoritmo englobado en la \autoref{eq:Adam} calcula en primer lugar un promedio exponencial del gradiente ($m_t$) y del gradiente cuadrado ($v_t$), cuyas tasas de descenso son controladas mediante los parámetros $\beta_1$ y $\beta_2$. Por otro lado, como $m_t$ y $v_t$ son inicialmente nulos, es necesario aplicarles una corrección para evitar su sesgado hacia cero, especialmente notable durante las primeras iteraciones. Tras ello, se realiza la actualización de los parámetros de manera análoga al método del descenso estocástico del gradiente.
 
 \section{Trabajos Relacionados} \label{Chapter:RelatedWork}
 

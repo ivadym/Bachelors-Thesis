@@ -89,6 +89,8 @@ En un primer momento y dado que en cada iteración el número de datos inyectado
 
 En la \autoref{fig:CycleGAN_metrics} del \autoref{Appendix:Figures} se pueden consultar las pérdidas del generador y del discriminador de este entrenamiento parcial. Desafortunadamente, éstas son muy poco intuitivas ya que la mejora de las métricas de uno de estos dos módulos implica la degradación de la respuesta del otro. El funcionamiento esperado, por lo tanto, es que tanto las pérdidas del generador como las del discriminador converjan hacia valores constantes.
 
+Por otro lado, en la \autoref{fig:CycleGAN_images} se puede observar la progresión de unas determinadas imágenes a lo largo de este entrenamiento incompleto. Son visibles los indicios que muestran que la red progresa convenientemente, logrando apreciarse incluso en las últimas iteraciones (\autoref{fig:CycleGAN_7300}) la intensificación de la expresión neutral y un cierto suavizado en la expresión de asco.
+
 \begin{figure}
     \centering
     \begin{subfigure}[t]{.45\textwidth}
@@ -122,6 +124,4 @@ En la \autoref{fig:CycleGAN_metrics} del \autoref{Appendix:Figures} se pueden co
     \caption{Imágenes extraídas de la red CycleGAN durante el entrenamiento.}
     \label{fig:CycleGAN_images}
 \end{figure}
-
-Por otro lado, en la \autoref{fig:CycleGAN_images} se puede observar la progresión de unas determinadas imágenes a lo largo de este entrenamiento incompleto. Son visibles los indicios que muestran que la red progresa convenientemente, logrando apreciarse incluso en las últimas iteraciones (\autoref{fig:CycleGAN_7300}) la intensificación de la expresión neutral y un cierto suavizado en la expresión de asco.
 
